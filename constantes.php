@@ -5,8 +5,18 @@
 	}
 	
 	if (!defined('URL')) define('URL', 'http://labs.lucianoandrade.me/hotel');
+	// if (!defined('URL')) define('URL', 'http://127.0.0.1/php-hotel');
 	if (!defined('DS'))  define('DS', '/');
 
 	if (!defined('DEBUG'))  define('DEBUG', FALSE);
 
+	if (!defined('DBHOST'))  define('HOST', 'mysql.hostinger.com.br');
+	if (!defined('DBUSER'))  define('USER', 'u966508396_adm');
+	if (!defined('DBPASS'))  define('PASS', '8mez?X[c&bj|?n');
+	if (!defined('DBNAME'))  define('DB', 'u966508396_hotel');
+	
+	// if (!defined('DBHOST'))  define('DBHOST', 'localhost');
+	// if (!defined('DBUSER'))  define('DBUSER', 'root');
+	// if (!defined('DBPASS'))  define('DBPASS', '');
+	// if (!defined('DBNAME'))  define('DBNAME', 'projectCake');
 ?>
