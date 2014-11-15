@@ -18,17 +18,13 @@ class Sessao {
     }
     
     public function set($chave, $valor) {
-		if(!isset($_SESSION)){
-			session_start();
-		}
+		session_start();
         $_SESSION[$chave] = $valor;
         session_write_close();
     }
     
     public function get($chave) {
-		if(!isset($_SESSION)){
-			session_start();
-		}
+        session_start();
         $value = $_SESSION[$chave];
         session_write_close();
         return $value;

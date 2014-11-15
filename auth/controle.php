@@ -22,13 +22,13 @@ switch($_REQUEST['acao']) {
 			if(isset($_SESSION['uri']) and !empty($_SESSION['uri'])) {
                 header('location: ' . $_SESSION['uri'] . '');
             } else {
-                header('location: ../home/index.php');
+                header('location: ../index.php?redirect=' . $_SESSION['uri'] . '');
             }
         }
         else {
             # envia o usuário de volta para 
             # o form de login
-            header('location: ../home/index.php');
+            header('location: login.php');
         }
         
         
@@ -38,7 +38,7 @@ switch($_REQUEST['acao']) {
         
         # envia o usuário para fora do sistema
         # o form de login
-        header('location: ../home/index.php');
+        header('location: logout.php');
         
     } break;
     

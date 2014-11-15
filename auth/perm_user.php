@@ -10,7 +10,8 @@ if ($aut->esta_logado()) {
     $usuario = $aut->pegar_usuario();
 }
 else {
-    $_SESSION['uri'] = $_SERVER['REQUEST_URI'];
+    $sess = Sessao::instanciar();
+    $sess->set('uri', $_SERVER['REQUEST_URI']);
     header('Location: login.php');
 }
 ?>
