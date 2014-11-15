@@ -6,7 +6,7 @@
 	
 	if (!defined('DS'))  define('DS', '/');
 	
-	if($_SERVER['HTTP_HOST'] = '127.0.0.1') {
+	if($_SERVER['HTTP_HOST'] == '127.0.0.1') {
 		if (!defined('URL')) define('URL', 'http://127.0.0.1/php-hotel');
 		if (!defined('DEBUG'))  define('DEBUG', TRUE);
 		
