@@ -1,15 +1,47 @@
 <?php
 
-define('__ROOT__', dirname(dirname(__FILE__))); 
+if (!defined('__ROOT__'))  define('__ROOT__', dirname(dirname(__FILE__)));
 
 if($_SERVER['HTTP_HOST'] == '127.0.0.1') {
-	include __ROOT__ . '\constantes.php';
+	include_once __ROOT__ . '\constantes.php';
 } else {
-	include __ROOT__ . '/constantes.php';
+	include_once __ROOT__ . '/constantes.php';
 }
-	
 
 ?>
+
+<?php 
+if($_SERVER['HTTP_HOST'] == '127.0.0.1') {
+	include_once __ROOT__ . '\auth\perm_admin.php';
+} else {
+	require_once __ROOT__ . '/auth/perm_admin.php';
+}
+
+//require_once __ROOT__ . '\auth\usuario.php';
+//require_once __ROOT__ . '\auth\sessao.php';
+//require_once __ROOT__ . '\auth\autenticador.php';
+//
+//$aut = Autenticador::instanciar();
+//
+//$usuario = null;
+//$admin = false;
+//
+//if ($aut->esta_logado()) {
+//    $usuario = $aut->pegar_usuario();
+//    
+//    if($usuario->getTipo() == 'admin') {
+//        $admin = true;
+//    }
+//}
+//
+//if($admin == false) {    
+//    header('Location: ../index.php');
+//}
+
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>

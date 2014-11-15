@@ -1,6 +1,18 @@
 <?php
 
-require_once '../constantes.php';
+//require_once '../constantes.php';
+
+if (!defined('__ROOT__'))  define('__ROOT__', dirname(dirname(__FILE__)));
+
+if($_SERVER['HTTP_HOST'] == '127.0.0.1') {
+	include_once __ROOT__ . '\constantes.php';
+} else {
+	include_once __ROOT__ . '/constantes.php';
+}
+
+
+
+
 
 abstract class Autenticador {
     

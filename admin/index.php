@@ -1,5 +1,8 @@
 	<?php  include 'header.php';  ?>
 
+<?php
+    //require_once '../auth/perm_admin.php';
+?>
 		<div class="jumbotron">
 			<h1>Página inicial</h1>
 			
