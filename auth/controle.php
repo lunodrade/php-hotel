@@ -17,7 +17,13 @@ switch($_REQUEST['acao']) {
         # efetua o processo de autenticação
         if ($aut->logar($_REQUEST['email'], $_REQUEST['senha'])) {
             # redireciona o usuário para dentro do sistema
-            header('location: interno_usuario.php');
+            //header('location: interno_usuario.php');
+            
+			if(isset($_SESSION['uri']) and !empty($_SESSION['uri'])) {
+                header('location: ' . $_SESSION['uri'] . '');
+            } else {
+                header('location: ../home/index.php');
+            }
         }
         else {
             # envia o usuário de volta para 
