@@ -1,4 +1,5 @@
-<?php include 'constantes.php'; 
+<?php 
+include 'constantes.php'; 
 
 require_once 'auth/usuario.php';
 require_once 'auth/sessao.php';

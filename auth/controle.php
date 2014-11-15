@@ -22,7 +22,7 @@ switch($_REQUEST['acao']) {
 			if(isset($_SESSION['uri']) and !empty($_SESSION['uri'])) {
                 header('location: ' . $_SESSION['uri'] . '');
             } else {
-                header('location: ../index.php?redirect=' . $_SESSION['uri'] . '');
+                header('location: ../index.php');
             }
         }
         else {
