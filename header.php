@@ -1,4 +1,16 @@
-<?php include 'constantes.php'; ?>
+<?php include 'constantes.php'; 
+
+require_once 'auth/usuario.php';
+require_once 'auth/sessao.php';
+require_once 'auth/autenticador.php';
+
+$aut = Autenticador::instanciar();
+
+$usuario = null;
+if ($aut->esta_logado()) {
+    $usuario = $aut->pegar_usuario();
+}
+?>
 
 <!DOCTYPE html>
 <html>
@@ -9,4 +21,3 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">    
 </head>
 <body>
-	<div class="container">

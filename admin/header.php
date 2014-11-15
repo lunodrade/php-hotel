@@ -8,37 +8,11 @@ if($_SERVER['HTTP_HOST'] == '127.0.0.1') {
 	include_once __ROOT__ . '/constantes.php';
 }
 
-?>
-
-<?php 
 if($_SERVER['HTTP_HOST'] == '127.0.0.1') {
 	include_once __ROOT__ . '\auth\perm_admin.php';
 } else {
 	require_once __ROOT__ . '/auth/perm_admin.php';
 }
-
-//require_once __ROOT__ . '\auth\usuario.php';
-//require_once __ROOT__ . '\auth\sessao.php';
-//require_once __ROOT__ . '\auth\autenticador.php';
-//
-//$aut = Autenticador::instanciar();
-//
-//$usuario = null;
-//$admin = false;
-//
-//if ($aut->esta_logado()) {
-//    $usuario = $aut->pegar_usuario();
-//    
-//    if($usuario->getTipo() == 'admin') {
-//        $admin = true;
-//    }
-//}
-//
-//if($admin == false) {    
-//    header('Location: ../index.php');
-//}
-
-
 ?>
 
 
@@ -50,12 +24,12 @@ if($_SERVER['HTTP_HOST'] == '127.0.0.1') {
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 
-    <link rel="stylesheet" href="http://www.rizer.com.br/assets/css/jquery.dataTables.css">
-    <link rel="stylesheet" href="http://www.rizer.com.br/assets/css/dataTables.bootstrap.css">
-    <link rel="stylesheet" href="http://www.rizer.com.br/assets/css/dataTables.tableTools.css">
-    <script type="text/javascript" src="http://www.rizer.com.br/assets/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="http://www.rizer.com.br/assets/js/dataTables.bootstrap.js"></script>
-    <script type="text/javascript" src="http://www.rizer.com.br/assets/js/dataTables.tableTools.js"></script>
+    <link rel="stylesheet" href='<?php echo URL; ?>/assets/css/jquery.dataTables.css'>
+    <link rel="stylesheet" href='<?php echo URL; ?>/assets/css/dataTables.bootstrap.css'>
+    <link rel="stylesheet" href='<?php echo URL; ?>/assets/css/dataTables.tableTools.css'>
+    <script type="text/javascript" src='<?php echo URL; ?>/assets/js/jquery.dataTables.min.js'></script>
+    <script type="text/javascript" src='<?php echo URL; ?>/assets/js/dataTables.bootstrap.js'></script>
+    <script type="text/javascript" src='<?php echo URL; ?>/assets/js/dataTables.tableTools.js'></script>
     
 </head>
 <body>
