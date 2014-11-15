@@ -1,21 +1,8 @@
 	<?php  include 'header.php';  ?>
 
-		<div class="jumbotron">
-			<h1>Página inicial</h1>
-			
-			<br>
-
-			<div id="body">
-
-				<p>Olá, tudo bom?</p>
-				
-				<p>Para o funcionamento do sistema é necessário apenas configurar os dados de acesso ao banco de dados no arquivo <code>database.php</code>
-
-			</div>
-			
-			<small>contato: só depois</small>
-
-		</div>
+		<h2>Olá</h2>
+		
+		Acessar a sessão <a href='admin/'>admin</a>
 	</div>
 
 	<?php  include 'footer.php';  ?>
