@@ -46,7 +46,13 @@ class Controller extends ConfigController
 		try {
 
 			if(isset($_POST) && !empty($_POST)) {
-				$data = $this->conn->prepare("UPDATE tb_usuarios SET usu_nome = '".$_POST['usu_nome']."', usu_email = '".$_POST['usu_email']."', usu_senha = '".$_POST['usu_senha']."', usu_tipo = '".$_POST['usu_tipo']."', fk_cli_cod = '".$_POST['fk_cli_cod']."' WHERE pk_usu_cod = ".$id."");
+				
+                
+				if(isset($_POST["fk_cli_cod"]) and !empty($_POST["fk_cli_cod"])) {
+					$data = $this->conn->prepare("UPDATE tb_usuarios SET usu_nome = '".$_POST['usu_nome']."', usu_email = '".$_POST['usu_email']."', usu_senha = '".$_POST['usu_senha']."', usu_tipo = '".$_POST['usu_tipo']."', fk_cli_cod = '".$_POST['fk_cli_cod']."' WHERE pk_usu_cod = ".$id."");
+				} else {
+					$data = $this->conn->prepare("UPDATE tb_usuarios SET usu_nome = '".$_POST['usu_nome']."', usu_email = '".$_POST['usu_email']."', usu_senha = '".$_POST['usu_senha']."', usu_tipo = '".$_POST['usu_tipo']."' WHERE pk_usu_cod = ".$id."");
+				}
 
 				if ($data->execute()) {
 					$_SESSION['sucess']  = 'Registro atualizado com sucesso! Oi!';
