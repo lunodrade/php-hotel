@@ -136,4 +136,3 @@ if(class_exists('Controller') && !isset($class))
 }
 
 ?>
-		
