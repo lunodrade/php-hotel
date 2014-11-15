@@ -10,10 +10,10 @@
 
 	if (!defined('DEBUG'))  define('DEBUG', FALSE);
 
-	if (!defined('DBHOST'))  define('HOST', 'mysql.hostinger.com.br');
-	if (!defined('DBUSER'))  define('USER', 'u966508396_adm');
-	if (!defined('DBPASS'))  define('PASS', '8mez?X[c&bj|?n');
-	if (!defined('DBNAME'))  define('DB', 'u966508396_hotel');
+	if (!defined('DBHOST'))  define('DBHOST', 'mysql.hostinger.com.br');
+	if (!defined('DBUSER'))  define('DBUSER', 'u966508396_adm');
+	if (!defined('DBPASS'))  define('DBPASS', '8mez?X[c&bj|?n');
+	if (!defined('DBNAME'))  define('DBNAME', 'u966508396_hotel');
 	
 	// if (!defined('DBHOST'))  define('DBHOST', 'localhost');
 	// if (!defined('DBUSER'))  define('DBUSER', 'root');
