@@ -1,5 +1,7 @@
 <?php
 
+require_once '../constantes.php';
+
 abstract class Autenticador {
     
     private static $instancia = null;
@@ -40,7 +42,8 @@ class AutenticadorEmBanco extends Autenticador {
 
     public function logar($email, $senha) {
         
-        $pdo = new PDO('mysql:dbname=projectCake;host=localhost', 'root', '');
+        //$pdo = new PDO('mysql:dbname=projectCake;host=localhost', 'root', '');
+        $pdo = new PDO("mysql:host=".DBHOST.";dbname=".DBNAME."", DBUSER, DBPASS);
         $sess = Sessao::instanciar();
         
         $sql = "select * 

@@ -18,20 +18,26 @@ class Sessao {
     }
     
     public function set($chave, $valor) {
-        session_start();
+		if(!isset($_SESSION)){
+			session_start();
+		}
         $_SESSION[$chave] = $valor;
         session_write_close();
     }
     
     public function get($chave) {
-        session_start();
+		if(!isset($_SESSION)){
+			session_start();
+		}
         $value = $_SESSION[$chave];
         session_write_close();
         return $value;
     }
     
     public function existe($chave) {
-        session_start();
+		if(!isset($_SESSION)){
+			session_start();
+		}
         if (isset($_SESSION[$chave]) && (!empty($_SESSION[$chave]))) {
             session_write_close();
             return true;
