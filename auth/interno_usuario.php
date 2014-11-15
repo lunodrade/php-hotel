@@ -40,7 +40,8 @@ else {
                             <strong><?php print $usuario->getCliente(); ?></strong>, 
                             <strong>
                     <?php
-                            $conn = new PDO('mysql:dbname=projectCake;host=localhost', 'root', '');
+                            $conn = new PDO("mysql:host=".DBHOST.";dbname=".DBNAME."", DBUSER, DBPASS);
+                            $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 
                             $sql = "select cli_nome 
                                    from tb_clientes
