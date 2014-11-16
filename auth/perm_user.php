@@ -12,6 +12,6 @@ if ($aut->esta_logado()) {
 else {
     $sess = Sessao::instanciar();
     $sess->set('uri', $_SERVER['REQUEST_URI']);
-    header('Location: login.php');
+    header('Location: '.URL.'/auth/login.php');
 }
 ?>

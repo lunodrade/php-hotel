@@ -17,6 +17,6 @@ if ($aut->esta_logado()) {
 }
 
 if($admin == false) {    
-    header('Location: ../index.php');
+    header('Location: '.URL.'/index.php');
 }
 ?>
