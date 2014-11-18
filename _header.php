@@ -69,4 +69,4 @@ if ($aut->esta_logado()) {
 		<?php } else { ?>
 		        <a href='auth/logout.php'>Sair</a>
         <?php } ?>	
-		<br><br><br><br><br><br><br>
+		<br><br><br><br>

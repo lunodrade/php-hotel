@@ -16,7 +16,7 @@
 		
 		<br><br><br><br><br><br><br><br><br><br><br><br>
 		
-		Mostrar os <a href='mostrar_quartos.php'>quartos</a><br><br><br><br><br><br>
+		Mostrar os <a href='page/mostrar_quartos.php'>quartos</a><br><br><br><br><br><br>
 		
 		<h1>Links de testes</h1>
 		Acessar a sessão <a href='admin/'>admin</a><br>
