@@ -34,7 +34,7 @@ if ($aut->esta_logado()) {
     
     <br><br><br><br><br><br><br><br>
     <h1>Cadastrar usuário</h1>
-    <form method="get">   
+    <form id="email" method="get">   
         <label for="checkEmail">Email</label>
         <input id="checkEmail" name="checkEmail" placeholder="Digite o email" />
         <button class="btnCheck">Verificar disponibilidade</button>   
@@ -51,7 +51,7 @@ if ($aut->esta_logado()) {
     			makeAjaxRequest();
     		});
 
-            $('form').submit(function(e){
+            $('#email').submit(function(e){
                 e.preventDefault();
                 makeAjaxRequest();
                 return false;
