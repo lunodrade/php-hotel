@@ -14,10 +14,27 @@ $usuario = null;
 if ($aut->esta_logado()) {
     $usuario = $aut->pegar_usuario();
 }
+
+$set_redirect = true;
+
+if(isset($_REQUEST['redirect']) and !empty($_REQUEST['redirect']))
+    $set_redirect = false;
+
+if(preg_match("/^.*auth\/login.php$/", $_SERVER['HTTP_REFERER']))
+    $set_redirect = false;
+
+if(preg_match("/^.*auth\/login.php\?redirect\=true$/", $_SERVER['HTTP_REFERER']))
+    $set_redirect = false;
+
+
+if($set_redirect) {
+    $sess = Sessao::instanciar();
+    $sess->set('uri', $_SERVER['HTTP_REFERER']);
+}
 ?>
 
 <?php  include '../_header.php';  ?>
-   
+    
     <h1>Tela de login</h1>
     <form action="controle.php" method="post" target="_self">
         <label for="email">E-mail</label><br>

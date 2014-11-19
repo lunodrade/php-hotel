@@ -6,8 +6,8 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Check in: <input type="text" class="span2" name="checkIn" value="" id="dpd1" data-date-format="dd/mm/yyyy"></th>
-                        <th>Check out: <input type="text" class="span2" name="checkOut" value="" id="dpd2" data-date-format="dd/mm/yyyy"></th>
+                        <th>Check in: <input type="text" class="span2" name="checkIn" value="" id="dpd1" data-date-format="dd/mm/yyyy" pattern="[0-9]{2}\/[0-9]{2}\/[0-9]{4}" title="Three letter country code" required></th>
+                        <th>Check out: <input type="text" class="span2" name="checkOut" value="" id="dpd2" data-date-format="dd/mm/yyyy" pattern="[0-9]{2}\/[0-9]{2}\/[0-9]{4}" required></th>
                     </tr>
                 </thead>
             </table>

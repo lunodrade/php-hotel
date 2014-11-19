@@ -65,8 +65,8 @@ if ($aut->esta_logado()) {
         ?>
 		
 		<?php if($usuario == null) { ?>	
-		        <a href='auth/login.php'>logar</a>
+		        <a href='<?php echo URL ?>/auth/login.php'>logar</a>
 		<?php } else { ?>
-		        <a href='auth/logout.php'>Sair</a>
+		        <a href='<?php echo URL ?>/auth/logout.php'>Sair</a>
         <?php } ?>	
 		<br><br><br><br>
