@@ -1,18 +1,21 @@
 	<?php  include '_header.php';  ?>
+    <link rel="stylesheet" href="assets/css/datepicker.css">
+        
+        <form action="controle.php" method="get">
+            
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Check in: <input type="text" class="span2" name="checkIn" value="" id="dpd1" data-date-format="dd/mm/yyyy"></th>
+                        <th>Check out: <input type="text" class="span2" name="checkOut" value="" id="dpd2" data-date-format="dd/mm/yyyy"></th>
+                    </tr>
+                </thead>
+            </table>
+
+            <button type="submit" id="acao" name="acao" value="logar">Entrar</button>
+        </form>
         
 		
-		
-		<form method="get">   
-            <label for="checkEmail">Email</label>
-            <input id="checkEmail" name="checkEmail" placeholder="Digite o email" />
-            <button class="btnCheck">Verificar disponibilidade</button>   
-        </form>
-        <div id="avaibleResult" style="
-                width: 300px;
-                height: 50px;
-                background-color: lightgray;
-                padding: 15px 0 10px 30px;
-        "></div>
 		
 		<br><br><br><br><br><br><br><br><br><br><br><br>
 		
@@ -23,28 +26,32 @@
 		Acessar uma página interna de <a href='auth/interno_usuario.php'>usuário</a><br>
 		Acessar uma página interna de <a href='auth/interno_admin.php'>admin</a><br>
 	
+	<script type="text/javascript" src="assets/js/bootstrap-datepicker.js"></script>
 	<script type="text/javascript">
     	jQuery(document).ready(function($) {
-    		$('.btnCheck').click(function(){
-    			makeAjaxRequest();
-    		});
+            var nowTemp = new Date();
+            var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
 
-            $('form').submit(function(e){
-                e.preventDefault();
-                makeAjaxRequest();
-                return false;
-            });
-
-            function makeAjaxRequest() {
-                $.ajax({
-                    url: 'ajax/checkAvailability.php',
-                    type: 'get',
-                    data: {email: $('input#checkEmail').val()},
-                    success: function(response) {
-                        $('#avaibleResult').html(response);
-                    }
-                });
-            }
+            var checkin = $('#dpd1').datepicker({
+              onRender: function(date) {
+                return date.valueOf() < now.valueOf() ? 'disabled' : '';
+              }
+            }).on('changeDate', function(ev) {
+              if (ev.date.valueOf() > checkout.date.valueOf()) {
+                var newDate = new Date(ev.date)
+                newDate.setDate(newDate.getDate() + 1);
+                checkout.setValue(newDate);
+              }
+              checkin.hide();
+              $('#dpd2')[0].focus();
+            }).data('datepicker');
+            var checkout = $('#dpd2').datepicker({
+              onRender: function(date) {
+                return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+              }
+            }).on('changeDate', function(ev) {
+              checkout.hide();
+            }).data('datepicker');
     	});
     </script>
 
