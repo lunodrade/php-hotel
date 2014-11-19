@@ -1,7 +1,7 @@
 	<?php  include '_header.php';  ?>
     <link rel="stylesheet" href="assets/css/datepicker.css">
         
-        <form action="controle.php" method="get">
+        <form action="page/mostrar_quartos.php" method="get">
             
             <table class="table">
                 <thead>
