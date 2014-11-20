@@ -46,11 +46,14 @@ if($set_redirect) {
         <br>
 
         <button type="submit" id="acao" name="acao" value="logar">Entrar</button>
+         <INPUT Type="BUTTON" VALUE="Cadastrar" ONCLICK="window.location.href='../user/cadastro/index.php'"> 
+          
     </form>
     
     
     <br><br><br><br><br><br><br><br>
-    <h1>Cadastrar usuário</h1>
+<!--  formulario de teste de email
+  <h1>Cadastrar usuário</h1>
     <form id="email" method="get">   
         <label for="checkEmail">Email</label>
         <input id="checkEmail" name="checkEmail" placeholder="Digite o email" />
@@ -62,6 +65,7 @@ if($set_redirect) {
             background-color: lightgray;
             padding: 15px 0 10px 30px;
     "></div>	
+
     <script type="text/javascript">
     	jQuery(document).ready(function($) {
     		$('.btnCheck').click(function(){
@@ -86,5 +90,9 @@ if($set_redirect) {
             }
     	});
     </script>
+-->
+
+
+
 
 <?php  include '../_footer.php';  ?>

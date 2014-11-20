@@ -85,7 +85,7 @@
 
             function makeAjaxRequest() {
                 $.ajax({
-                    url: '../ajax/checkAvailability.php',
+                    url: '../../ajax/checkAvailability.php',
                     type: 'get',
                     data: {email: $('input#checkEmail').val()},
                     success: function(response) {
