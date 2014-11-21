@@ -131,14 +131,14 @@ VALUES
 INSERT INTO tb_quartos
 (pk_qua_num,  qua_status, fk_tip_cod) 
 VALUES
-(101,   true,   1),
-(102,   false,  1),
-(103,   true,   2),
-(104,   true,   1),
-(105,   true,   1),
-(106,   true,   2),
+(101,    true,   1),
+(102,    false,   1),
+(103,    true,   2),
+(104,    true,   1),
+(105,    true,   1),
+(106,    true,   2),
 (201,   true,   3),
-(202,   true,   3);
+(202,    true,   3);
 
 -- Inserindo as reservas
 INSERT INTO tb_reservas

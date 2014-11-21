@@ -13,60 +13,137 @@ if ($aut->esta_logado()) {
 }
 ?>
 
+
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Seu projeto!</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">    
-</head>
-<body>
+<html lang="en">
+  <head>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="<?php echo URL ?>/favicon.ico">
     
-	<div class="container">
-   
-        <h3>Ir para a <a href='<?php echo URL ?>/'>home</a></h3><br><br>
+    <script type="text/javascript" src="<?php echo ASSETS ?>/js/jquery.min.js"></script>
+
+    <title>Hotel</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="<?php echo ASSETS ?>//css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="<?php echo ASSETS ?>/css/cover.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="<?php echo ASSETS ?>/js/ie-emulation-modes-warning.js"></script><style type="text/css"></style>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
     
-		<h2>Olá, <strong>
-		<?php 
-            if($usuario != null) {
-                if($usuario->getCliente() > 0) {
-                    $conn = new PDO("mysql:host=".DBHOST.";dbname=".DBNAME."", DBUSER, DBPASS);
-                    $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 
-                    $sql = "select cli_nome 
-                           from tb_clientes
-                           where pk_cli_cod = {$usuario->getCliente()};";
+    <style type="text/css">
+        .site-wrapper {
+        <?php 
+        if(preg_match("/^\/".ROOT."\/index.php$|^\/".ROOT."\/$/", $_SERVER['REQUEST_URI'])) {
+        ?>
+            background-image: url("<?php echo ASSETS ?>/img/background.jpg");
+            background-size: cover;
+        <?php
+        } else {
+        ?>
+            background: url("<?php echo ASSETS ?>/img/pattern.png");
+        <?php
+        }
+        ?>
+        }
+        .goLoginBtn {
+            font-size: 0.5em;
+        }
+    </style>
+    
+  </head>
 
-                    $stm = $conn->query($sql);
+  <body>
 
-                    if ($stm->rowCount() > 0) {
-                        $dados = $stm->fetch(PDO::FETCH_ASSOC);
-                        echo($dados['cli_nome']);
+    <div class="site-wrapper">
+
+      <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+          <div class="masthead clearfix">
+            <div class="inner">
+              <h3 class="masthead-brand">
+                  Ol&aacute;, 
+                    <?php 
+                        if($usuario != null) {
+                            if($usuario->getCliente() > 0) {
+                                $conn = new PDO("mysql:host=".DBHOST.";dbname=".DBNAME."", DBUSER, DBPASS);
+                                $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+
+                                $sql = "select cli_nome 
+                                       from tb_clientes
+                                       where pk_cli_cod = {$usuario->getCliente()};";
+
+                                $stm = $conn->query($sql);
+
+                                if ($stm->rowCount() > 0) {
+                                    $dados = $stm->fetch(PDO::FETCH_ASSOC);
+                                    echo($dados['cli_nome']);
+                                }
+                            } else {
+                                echo('Administrador');
+                            }
+                        } else {
+                            echo('Convidado');
+                        }
+                        if($usuario != null) {
+                    ?>
+                            <span class="goLoginBtn">(<a href="<?php echo URL ?>/auth/logout.php">sair</a>)</span>
+                    <?php } else { ?>
+                            <span class="goLoginBtn">(<a href="<?php echo URL ?>/auth/login.php">logar</a>)</span>
+                    <?php } ?>
+              </h3>
+              <nav>
+                <ul class="nav masthead-nav">
+                    <li 
+                    <?php 
+                    if(preg_match("/^\/".ROOT."\/index.php$|^\/".ROOT."\/$/", $_SERVER['REQUEST_URI'])) {
+                        echo 'class="active"';
                     }
-                } else {
-                    echo('Administrador');
-                }
-            } else {
-                echo('Convidado');
-            }
-        ?>
-		</strong>		
-		</h2>
-       
-		<?php 
-            if($usuario != null) {
-                if($usuario->getCliente() > 0) {
-        ?>
-                    Acessar <a href='<?php echo URL ?>/user/index.php'>meu perfil</a><br>
-		<?php 
-                }
-            }
-        ?>
-		
-		<?php if($usuario == null) { ?>	
-		        <a href='<?php echo URL ?>/auth/login.php'>logar</a>
-		<?php } else { ?>
-		        <a href='<?php echo URL ?>/auth/logout.php'>Sair</a>
-        <?php } ?>	
-		<br><br><br><br>
+                    ?>
+                    ><a href="<?php echo URL ?>/">Inicio</a></li>
+                    <?php
+                    if($usuario != null) {
+                        if($usuario->getCliente() > 0) {
+                    ?>
+                            <li 
+                            <?php 
+                            if(preg_match("/^\/".ROOT."\/user\/index.php$|^\/".ROOT."\/user\/$/", $_SERVER['REQUEST_URI'])) {
+                                echo 'class="active"';
+                            }
+                            ?>
+                            ><a href="<?php echo URL ?>/user">Perfil</a></li>
+                    <?php 
+                        } else {
+                    ?>
+                            <li
+                            <?php 
+                            if(preg_match("/^\/".ROOT."\/admin\/index.php$|^\/".ROOT."\/admin\/$/", $_SERVER['REQUEST_URI'])) {
+                                echo 'class="active"';
+                            }
+                            ?>
+                            ><a href="<?php echo URL ?>/admin">Admin</a></li>
+                    <?php 
+                        }
+                    } 
+                    ?>
+                </ul>
+              </nav>
+            </div>
+          </div>

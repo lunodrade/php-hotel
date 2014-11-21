@@ -8,8 +8,6 @@
 	
 	if($_SERVER['HTTP_HOST'] == '127.0.0.1') {
 		if (!defined('URL')) define('URL', 'http://127.0.0.1/php-hotel');
-		if (!defined('ASSETS')) define('ASSETS', 'http://127.0.0.1/php-hotel/assets');
-		if (!defined('ROOT')) define('ROOT', 'php-hotel');
 		if (!defined('DEBUG'))  define('DEBUG', TRUE);
 		
 		if (!defined('DBHOST'))  define('DBHOST', 'localhost');
@@ -19,8 +17,6 @@
 		
 	} else {
 		if (!defined('URL')) define('URL', 'http://labs.lucianoandrade.me/hotel');
-		if (!defined('ASSETS')) define('ASSETS', 'http://127.0.0.1/hotel/assets');
-		if (!defined('ROOT')) define('ROOT', 'hotel');
 		if (!defined('DEBUG'))  define('DEBUG', FALSE);
 
 		if (!defined('DBHOST'))  define('DBHOST', 'mysql.hostinger.com.br');

@@ -20,11 +20,15 @@ $set_redirect = true;
 if(isset($_REQUEST['redirect']) and !empty($_REQUEST['redirect']))
     $set_redirect = false;
 
-if(preg_match("/^.*auth\/login.php$/", $_SERVER['HTTP_REFERER']))
-    $set_redirect = false;
+if(isset($_SERVER['HTTP_REFERER'])) {
+    if(preg_match("/^.*auth\/login.php$/", $_SERVER['HTTP_REFERER']))
+        $set_redirect = false;
 
-if(preg_match("/^.*auth\/login.php\?redirect\=true$/", $_SERVER['HTTP_REFERER']))
+    if(preg_match("/^.*auth\/login.php\?redirect\=true$/", $_SERVER['HTTP_REFERER']))
+        $set_redirect = false;
+} else {
     $set_redirect = false;
+}
 
 
 if($set_redirect) {
@@ -34,65 +38,94 @@ if($set_redirect) {
 ?>
 
 <?php  include '../_header.php';  ?>
-    
-    <h1>Tela de login</h1>
-    <form action="controle.php" method="post" target="_self">
-        <label for="email">E-mail</label><br>
-        <input type="text" id="email" name="email" value="">
-        <br>
 
-        <label for="senha">Senha</label><br>
-        <input type="password" id="senha" name="senha" value="">
-        <br>
+<link href="../assets/css/auth.css" rel="stylesheet">
 
-        <button type="submit" id="acao" name="acao" value="logar">Entrar</button>
-         <INPUT Type="BUTTON" VALUE="Cadastrar" ONCLICK="window.location.href='../user/cadastro/index.php'"> 
-          
-    </form>
+
+
+<div class="inner cover">
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+    <h1>Faça o seu login</h1>
+
+      <form action="controle.php" method="post" class="form-signin" role="form">
+        <label for="inputEmail" class="sr-only">Email</label>
+        <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Endereço de email" required autofocus>
+        <label for="inputPassword" class="sr-only">Senha</label>
+        <input name="senha" type="password" id="inputPassword" class="form-control" placeholder="Senha" required>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="remember-me"> Lembrar-me
+          </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" name="acao" value="logar">Logar</button>
+      </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
     
     
-    <br><br><br><br><br><br><br><br>
-<!--  formulario de teste de email
-  <h1>Cadastrar usuário</h1>
-    <form id="email" method="get">   
-        <label for="checkEmail">Email</label>
-        <input id="checkEmail" name="checkEmail" placeholder="Digite o email" />
-        <button class="btnCheck">Verificar disponibilidade</button>   
-    </form>
-    <div id="avaibleResult" style="
-            width: 300px;
-            height: 50px;
-            background-color: lightgray;
-            padding: 15px 0 10px 30px;
-    "></div>	
-
     <script type="text/javascript">
     	jQuery(document).ready(function($) {
-    		$('.btnCheck').click(function(){
-    			makeAjaxRequest();
-    		});
-
-            $('#email').submit(function(e){
-                e.preventDefault();
-                makeAjaxRequest();
-                return false;
-            });
-
-            function makeAjaxRequest() {
-                $.ajax({
-                    url: '../ajax/checkAvailability.php',
-                    type: 'get',
-                    data: {email: $('input#checkEmail').val()},
-                    success: function(response) {
-                        $('#avaibleResult').html(response);
-                    }
-                });
-            }
+            
+            
+            
+            
+            
+            
+//    		$('.btnCheck').click(function(){
+//    			makeAjaxRequest();
+//    		});
+//
+//            $('#email').submit(function(e){
+//                e.preventDefault();
+//                makeAjaxRequest();
+//                return false;
+//            });
+//
+//            function makeAjaxRequest() {
+//                $.ajax({
+//                    url: '../ajax/checkAvailability.php',
+//                    type: 'get',
+//                    data: {email: $('input#checkEmail').val()},
+//                    success: function(response) {
+//                        $('#avaibleResult').html(response);
+//                    }
+//                });
+//            }
+            
+            
+            
+            
+            
+            
+            
     	});
     </script>
--->
-
-
-
 
 <?php  include '../_footer.php';  ?>

@@ -4,39 +4,9 @@
 	require_once '../auth/perm_user.php'; 
 ?>
 
-<div class="inner cover">
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
     <h1>Tela de pagamento</h1>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
+    <br><br><br><br><br><br>
 
 <?php  include '../_footer.php';  ?>
