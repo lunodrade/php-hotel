@@ -36,7 +36,7 @@
         .outerDias {
             margin: 10% 0 3% 0;
             padding: 10px;
-            background-color: dimgray;
+            background-color: rgba(20,20,20,0.7);;
             font-weight: bolder;
         }
     </style>
@@ -88,6 +88,11 @@
                     return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
                 }
             }).on('changeDate', function(ev) {
+                if (ev.date.valueOf() <= checkin.date.valueOf()) {
+                    var newDate = new Date(checkin.date)
+                    newDate.setDate(newDate.getDate() + 1);
+                    checkout.setValue(newDate);
+                }
                 checkout.hide();
                 setDaysReserved();
             }).data('datepicker');

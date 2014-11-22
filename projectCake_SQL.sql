@@ -1,7 +1,7 @@
 -- Created by Vertabelo (http://vertabelo.com)
 -- Script type: create
 -- Scope: [tables, references, sequences, views, procedures]
--- Generated at Fri Nov 14 12:07:23 UTC 2014
+-- Generated at Sat Nov 22 01:17:46 UTC 2014
 
 
 
@@ -13,6 +13,8 @@
 CREATE TABLE tb_clientes (
     pk_cli_cod int    NOT NULL  AUTO_INCREMENT,
     cli_nome varchar(100)    NOT NULL ,
+    cli_sexo varchar(2)    NOT NULL ,
+    cli_tel varchar(15)    NOT NULL ,
     cli_nasc date    NOT NULL ,
     cli_rg bigint    NOT NULL ,
     cli_cpf bigint    NOT NULL ,
@@ -58,10 +60,11 @@ CREATE TABLE tb_tipos (
 
 CREATE TABLE tb_usuarios (
     pk_usu_cod int    NOT NULL  AUTO_INCREMENT,
-    usu_nome varchar(50)    NOT NULL ,
     usu_email varchar(100)    NOT NULL ,
     usu_senha varchar(50)    NOT NULL ,
     usu_tipo varchar(20)    NOT NULL ,
+    usu_conf bool    NOT NULL ,
+    usu_hash varchar(100)    NOT NULL ,
     fk_cli_cod int    NULL ,
     CONSTRAINT tb_usuarios_pk PRIMARY KEY (pk_usu_cod)
 );
@@ -105,19 +108,19 @@ ALTER TABLE tb_usuarios ADD CONSTRAINT tbusu_fkclicod FOREIGN KEY tbusu_fkclicod
 
 -- Inserindo Clientes
 INSERT INTO tb_clientes
-(cli_nome,  cli_nasc,    cli_rg,   cli_cpf) 
+(cli_nome,   cli_sexo,  cli tel,   cli_nasc,     cli_rg,    cli_cpf) 
 VALUES
-('Luciano', '1990-8-22',   1154452018, 42254908012),
-('Ana',    '1980-2-2',   1104414504, 02024232313),
-('Bruna', '1993-4-12',   1107300418, 12312453456),
-('Carlos', '1994-8-21',   2738756418, 03423189045),
-('Juliano', '1985-7-16',   4530325348, 12352525245),
-('Maicon', '1974-10-2',   1404553418, 04533188534),
-('Jean', '1994-6-13',   4540534638, 11241008008),
-('Diego', '1986-5-4',   1424383418, 02045413058),
-('Fernanda','1992-3-7',   1547387818, 45343787567),
-('Paula', '1986-2-12',   1465732418, 02756754508),
-('Suelen', '1995-4-30',   1121243418, 45153858456);
+('Luciano',  'm',   '5199728320',  '1990-8-22',    1154452018, 42254908012),
+('Ana',   'f',   '5192872355',   '1980-2-2',    1104414504, 02024232313),
+('Bruna',   'f',   '5195245222',  '1993-4-12',    1107300418, 12312453456),
+('Carlos',   'm',   '5199578228',  '1994-8-21',    2738756418, 03423189045),
+('Juliano',  'm',   '5198822452',  '1985-7-16',    4530325348, 12352525245),
+('Maicon',   'm',   '5191419444', '1974-10-2',    1404553418, 04533188534),
+('Jean',   'm',   '5198452220',  '1994-6-13',    4540534638, 11241008008),
+('Diego',   'm',   '5199558245', '1986-5-4',    1424383418, 02045413058),
+('Fernanda',  'f',   '5192528111', '1992-3-7',    1547387818, 45343787567),
+('Paula',   'f',   '5192525541',  '1986-2-12',    1465732418, 02756754508),
+('Suelen',   'f',   '5195358225',  '1995-4-30',    1121243418, 45153858456);
 
 -- Inserindo Tipos de quartos
 INSERT INTO tb_tipos
@@ -129,16 +132,16 @@ VALUES
 
 -- Inserindo os quartos
 INSERT INTO tb_quartos
-(pk_qua_num,  qua_status, fk_tip_cod) 
+(pk_qua_num,   qua_status, fk_tip_cod) 
 VALUES
-(101,   true,   1),
-(102,   false,  1),
-(103,   true,   2),
-(104,   true,   1),
-(105,   true,   1),
-(106,   true,   2),
-(201,   true,   3),
-(202,   true,   3);
+(101,      true,    1),
+(102,      false,   1),
+(103,      true,    2),
+(104,      true,    1),
+(105,      true,    1),
+(106,      true,    2),
+(201,     true,    3),
+(202,      true,    3);
 
 -- Inserindo as reservas
 INSERT INTO tb_reservas
@@ -156,6 +159,11 @@ VALUES
 ('2014-11-12 13:00:00', '2014-11-14 12:00:00',  1.99,   202,   8),
 ('2014-11-14 13:00:00', '2014-11-15 12:00:00',  1.99,   202,   10);
 
+-- Inserindo os usuários
+INSERT INTO tb_usuarios
+(usu_email,   usu_senha,  usu_tipo,  usu_conf,  usu_hash,  fk_cli_cod)
+VALUE
+('odin@gmail.com',  '123456',  'admin',  true,   '',   null),
+('mario@gmail.com', '123456',  'user',  true,   '',   6);
 
 -- End of file.
-

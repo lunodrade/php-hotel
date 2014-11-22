@@ -72,6 +72,11 @@ function getRoomList($checkIn, $checkOut) {
         display: none;
     }
     
+    input[type=radio], input[type=checkbox] {
+        width: 36px;
+        height: 36px;
+    }
+    
     @media (max-height: 480px) {
         .fullheight-container {
             height: 24vh;

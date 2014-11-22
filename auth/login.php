@@ -72,8 +72,8 @@ if($set_redirect) {
         <button class="btn btn-lg btn-primary btn-block" type="submit" name="acao" value="logar">Logar</button>
       </form>
 
-
-
+    <br><br>
+    <a href="signup.php">Ainda n&atilde;o &eacute; cadastrado?</a>
 
 
 
