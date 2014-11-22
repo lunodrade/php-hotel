@@ -1,9 +1,4 @@
 	<?php  include 'header.php';  ?>
-
-<?php
-    //require_once '../auth/perm_admin.php';
-?>
-		<div class="jumbotron">
 			<h1>Página inicial</h1>
 			
 			<br>
@@ -18,7 +13,5 @@
 			
 			<small>contato: só depois</small>
 
-		</div>
-	</div>
 
 	<?php  include 'footer.php';  ?>

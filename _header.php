@@ -30,7 +30,7 @@ if ($aut->esta_logado()) {
     <title>Hotel</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="<?php echo ASSETS ?>//css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo ASSETS ?>/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="<?php echo ASSETS ?>/css/cover.css" rel="stylesheet">
