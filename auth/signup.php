@@ -112,7 +112,7 @@
 
     <div class="form-group">                               
         <div class="col-md-12">
-            <button id="btn-signup" type="button" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp; Sign Up</button>
+            <button id="btn-signup" type="submit" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp; Sign Up</button>
 
         </div>
     </div>

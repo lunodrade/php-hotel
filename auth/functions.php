@@ -7,7 +7,7 @@ require_once 'cadastro.php';
     * @param object $class, string $acao, int $id
     * @return void
     */
-	function executar($class, $acao, $id)
+	function executar($class, $acao)
 	{
 		if  ($acao == 'salvar') 
 		{	
@@ -15,13 +15,9 @@ require_once 'cadastro.php';
 		}
 	}
 
-	if (!isset($_GET['id']) ? $_GET['id'] = '' : '');
-
+	
 	if (isset($_POST) && !empty($_POST) && isset($_GET['acao']))
 	{	
-		executar($class, $_GET['acao'], $_GET['id']);
+		executar($class, $_GET['acao']);
 	} 
-	elseif (isset($_GET) && !empty($_GET) && isset($_GET['acao'])) 
-	{
-		executar($class, $_GET['acao'], $_GET['id']);
-	}
+	
