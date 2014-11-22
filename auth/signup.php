@@ -60,8 +60,8 @@
     <label for="sexo" class="col-md-3 control-label">Sexo</label>
     <div class="col-md-9">
         <select  name="sexo" class="form-control">
-            <option>Masculino</option>
-            <option>Feminino</option>
+            <option value="m">Masculino</option>
+            <option value="f">Feminino</option>
                             
         </select> 
     </div>
