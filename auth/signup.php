@@ -39,8 +39,6 @@
 
 
 
-
-
     <div class="form-group">
         <label for="firstname" class="col-md-3 control-label">Nome</label>
         <div class="col-md-9">
@@ -53,6 +51,13 @@
         <div class="col-md-9">
             <input type="text" class="form-control" name="sobrenome" placeholder="Sobrenome">
         </div>
+    </div>
+    
+   <div class="form-group">
+    <label for="sexo" class="col-md-3 control-label">Sexo</label>
+    <div class="col-md-9">
+        <input type="text" class="form-control" name="sexo" placeholder="sexo">
+    </div>
     </div>
     
     <div class="form-group">
@@ -69,10 +74,24 @@
         </div>
     </div>
 
-    <div class="form-group">
-        <label for="icode" class="col-md-3 control-label">Invitation Code</label>
+   <div class="form-group">
+        <label for="rg" class="col-md-3 control-label">RG</label>
         <div class="col-md-9">
-            <input type="text" class="form-control" name="icode" placeholder="">
+            <input type="number" class="form-control" name="rg" placeholder="RG">
+        </div>
+    </div>
+    
+       <div class="form-group">
+        <label for="cpf" class="col-md-3 control-label">CPF</label>
+        <div class="col-md-9">
+            <input type="number" class="form-control" name="cpf" placeholder="CPF">
+        </div>
+    </div>
+    
+       <div class="form-group">
+        <label for="datanasc" class="col-md-3 control-label">Data Nacimento</label>
+        <div class="col-md-9">
+            <input type="date" class="form-control" name="datanasc" placeholder="Data de Nascimento">
         </div>
     </div>
 
