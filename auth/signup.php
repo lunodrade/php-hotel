@@ -1,4 +1,7 @@
-<?php  include '../_header.php';  ?>
+<?php  
+    include '../_header.php';   
+    require_once 'cadastro.php';
+?> 
 
 <style type="text/css">
     .inner.cover {
@@ -35,7 +38,7 @@
     
     
     
-    <form id="signupform" class="form-horizontal" role="form">
+    <form id="signupform" class="form-horizontal" role="form" action="functions.php?acao=salvar" method="post">
 
 
 
@@ -56,20 +59,28 @@
    <div class="form-group">
     <label for="sexo" class="col-md-3 control-label">Sexo</label>
     <div class="col-md-9">
-        <select name="sexo" class="form_control" required>
-            <option value="Masculino">Masculino</option>
-            <option value="Feminino">Feminino</option>
+        <select  name="sexo" class="form-control">
+            <option>Masculino</option>
+            <option>Feminino</option>
                             
         </select> 
     </div>
     </div>
     
     <div class="form-group">
+        <label for="lastname" class="col-md-3 control-label">Telefone</label>
+        <div class="col-md-9">
+        <input type="number" class="form-control" name="telefone" placeholder="Telefone">
+        </div>
+    </div>
+
+    <div class="form-group">
         <label for="email" class="col-md-3 control-label">Email</label>
         <div class="col-md-9">
             <input type="text" class="form-control" name="email" placeholder="Email">
         </div>
     </div>
+    
     
     <div class="form-group">
         <label for="password" class="col-md-3 control-label">Senha</label>
