@@ -108,7 +108,7 @@ ALTER TABLE tb_usuarios ADD CONSTRAINT tbusu_fkclicod FOREIGN KEY tbusu_fkclicod
 
 -- Inserindo Clientes
 INSERT INTO tb_clientes
-(cli_nome,   cli_sexo,  cli tel,   cli_nasc,     cli_rg,    cli_cpf) 
+(cli_nome,   cli_sexo,  cli_tel,   cli_nasc,     cli_rg,    cli_cpf) 
 VALUES
 ('Luciano',  'm',   '5199728320',  '1990-8-22',    1154452018, 42254908012),
 ('Ana',   'f',   '5192872355',   '1980-2-2',    1104414504, 02024232313),
