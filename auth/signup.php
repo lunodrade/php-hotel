@@ -56,7 +56,11 @@
    <div class="form-group">
     <label for="sexo" class="col-md-3 control-label">Sexo</label>
     <div class="col-md-9">
-        <input type="text" class="form-control" name="sexo" placeholder="sexo">
+        <select name="sexo" class="form_control" required>
+            <option value="Masculino">Masculino</option>
+            <option value="Feminino">Feminino</option>
+                            
+        </select> 
     </div>
     </div>
     
