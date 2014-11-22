@@ -2,7 +2,6 @@
 
 class Usuario {
     private $id = null;
-    private $nome = null;
     private $email = null;
     private $senha = null;
     private $tipo = null;
@@ -10,10 +9,6 @@ class Usuario {
     
     public function getId() {
         return $this->id;
-    }
-    
-    public function getNome() {
-        return $this->nome;
     }
     
     public function getEmail() {
@@ -34,10 +29,6 @@ class Usuario {
     
     public function setId($id) {
         $this->id = $id;
-    }
-    
-    public function setNome($nome) {
-        $this->nome = $nome;
     }
     
     public function setEmail($email) {

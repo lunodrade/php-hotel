@@ -16,21 +16,6 @@
 </div>
 
 <div class="form-group">
-<label>Cli Sobr</label>
-<input type="text" name="cli_sobr" value="<?php  echo $data["tb_clientes"]["cli_sobr"];  ?>" class="form-control" placeholder="Cli Sobr" required>
-</div>
-
-<div class="form-group">
-<label>Cli Sexo</label>
-<input type="text" name="cli_sexo" value="<?php  echo $data["tb_clientes"]["cli_sexo"];  ?>" class="form-control" placeholder="Cli Sexo" required>
-</div>
-
-<div class="form-group">
-<label>Cli Tel</label>
-<input type="text" name="cli_tel" value="<?php  echo $data["tb_clientes"]["cli_tel"];  ?>" class="form-control" placeholder="Cli Tel" required>
-</div>
-
-<div class="form-group">
 <label>Cli Nasc</label>
 <input type="text" name="cli_nasc" value="<?php  echo $data["tb_clientes"]["cli_nasc"];  ?>" class="form-control" placeholder="Cli Nasc" required>
 </div>

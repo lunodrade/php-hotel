@@ -18,13 +18,10 @@
 						<thead>
 							<tr>
 								<th>Pk Cli Cod</th>
-<th>Cli Nome</th>
-<th>Cli Sobr</th>
-<th>Cli Sexo</th>
-<th>Cli Tel</th>
-<th>Cli Nasc</th>
-<th>Cli Rg</th>
-<th>Cli Cpf</th>
+								<th>Cli Nome</th>
+								<th>Cli Nasc</th>
+								<th>Cli Rg</th>
+								<th>Cli Cpf</th>
 
 
 								<th class="bt-padrao">Editar</th>
@@ -40,13 +37,10 @@
 								<?php foreach ($result as $key => $value) {  ?>
 									<tr>
 										<td><?php  echo $value['pk_cli_cod'];  ?></td>
-<td><?php  echo $value['cli_nome'];  ?></td>
-<td><?php  echo $value['cli_sobr'];  ?></td>
-<td><?php  echo $value['cli_sexo'];  ?></td>
-<td><?php  echo $value['cli_tel'];  ?></td>
-<td><?php  echo $value['cli_nasc'];  ?></td>
-<td><?php  echo $value['cli_rg'];  ?></td>
-<td><?php  echo $value['cli_cpf'];  ?></td>
+										<td><?php  echo $value['cli_nome'];  ?></td>
+										<td><?php  echo $value['cli_nasc'];  ?></td>
+										<td><?php  echo $value['cli_rg'];  ?></td>
+										<td><?php  echo $value['cli_cpf'];  ?></td>
 
 										<td><a href='<?php  echo URL;  ?>/admin/tb_clientes/functions.php?acao=atualizar&id=<?php echo $value['pk_cli_cod']; ?>'><span class='glyphicon glyphicon-ok'></span></a></td>
 										<td><a href='<?php  echo URL;  ?>/admin/tb_clientes/functions.php?acao=deletar&id=<?php echo $value['pk_cli_cod']; ?>'><span class='glyphicon glyphicon-remove'></span></a></td>

@@ -33,7 +33,7 @@ class Controller extends ConfigController
 			}
 		}
 
-		header("Location: ". URL . DS . 'admin' . DS . 'tb_quartos');
+		header("Location: ". URL . DS . 'tb_quartos');
 	}
 
 	public function atualizar($id)
@@ -69,7 +69,7 @@ class Controller extends ConfigController
 			}
 		}
 
-		header("Location: ". URL . DS . 'admin' . DS . 'tb_quartos');
+		header("Location: ". URL . DS . 'tb_quartos');
 	}
 
 	public function listar()
@@ -111,7 +111,7 @@ class Controller extends ConfigController
 			}
 		}
 
-		header("Location: ". URL . DS . 'admin' . DS . 'tb_quartos');
+		header("Location: ". URL . DS . 'tb_quartos');
 	}
 
 	public function listaCombo()

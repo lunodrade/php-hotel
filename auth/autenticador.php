@@ -63,14 +63,25 @@ class AutenticadorEmBanco extends Autenticador {
                    
         $stm = $pdo->query($sql);
         
+        
+//CREATE TABLE tb_usuarios (
+//    pk_usu_cod int    NOT NULL  AUTO_INCREMENT,
+//    usu_email varchar(100)    NOT NULL ,
+//    usu_senha varchar(50)    NOT NULL ,
+//    usu_tipo varchar(20)    NOT NULL ,
+//    usu_conf bool    NOT NULL ,
+//    usu_hash varchar(100)    NOT NULL ,
+//    fk_cli_cod int    NULL ,
+//    CONSTRAINT tb_usuarios_pk PRIMARY KEY (pk_usu_cod)
+//);
+        
         if ($stm->rowCount() > 0) {
         
             $dados = $stm->fetch(PDO::FETCH_ASSOC);
 
             $usuario = new Usuario();
-            $usuario->setEmail($dados['usu_nome']);
             $usuario->setId($dados['pk_usu_cod']);
-            $usuario->setNome($dados['usu_nome']);
+            $usuario->setEmail($dados['usu_email']);
             $usuario->setSenha($dados['usu_senha']);
             $usuario->setTipo($dados['usu_tipo']);
             $usuario->setCliente($dados['fk_cli_cod']);

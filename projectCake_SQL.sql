@@ -1,7 +1,7 @@
 -- Created by Vertabelo (http://vertabelo.com)
 -- Script type: create
 -- Scope: [tables, references, sequences, views, procedures]
--- Generated at Sat Nov 22 01:17:46 UTC 2014
+-- Generated at Sat Nov 22 01:38:59 UTC 2014
 
 
 
@@ -12,7 +12,8 @@
 
 CREATE TABLE tb_clientes (
     pk_cli_cod int    NOT NULL  AUTO_INCREMENT,
-    cli_nome varchar(100)    NOT NULL ,
+    cli_nome varchar(50)    NOT NULL ,
+    cli_sobr varchar(50)    NOT NULL ,
     cli_sexo varchar(2)    NOT NULL ,
     cli_tel varchar(15)    NOT NULL ,
     cli_nasc date    NOT NULL ,
@@ -108,19 +109,19 @@ ALTER TABLE tb_usuarios ADD CONSTRAINT tbusu_fkclicod FOREIGN KEY tbusu_fkclicod
 
 -- Inserindo Clientes
 INSERT INTO tb_clientes
-(cli_nome,   cli_sexo,  cli_tel,   cli_nasc,     cli_rg,    cli_cpf) 
+(cli_nome, cli_sobr,  cli_sexo,  cli_tel,   cli_nasc,     cli_rg,    cli_cpf) 
 VALUES
-('Luciano',  'm',   '5199728320',  '1990-8-22',    1154452018, 42254908012),
-('Ana',   'f',   '5192872355',   '1980-2-2',    1104414504, 02024232313),
-('Bruna',   'f',   '5195245222',  '1993-4-12',    1107300418, 12312453456),
-('Carlos',   'm',   '5199578228',  '1994-8-21',    2738756418, 03423189045),
-('Juliano',  'm',   '5198822452',  '1985-7-16',    4530325348, 12352525245),
-('Maicon',   'm',   '5191419444', '1974-10-2',    1404553418, 04533188534),
-('Jean',   'm',   '5198452220',  '1994-6-13',    4540534638, 11241008008),
-('Diego',   'm',   '5199558245', '1986-5-4',    1424383418, 02045413058),
-('Fernanda',  'f',   '5192528111', '1992-3-7',    1547387818, 45343787567),
-('Paula',   'f',   '5192525541',  '1986-2-12',    1465732418, 02756754508),
-('Suelen',   'f',   '5195358225',  '1995-4-30',    1121243418, 45153858456);
+('Luciano', 'Andrade', 'm',   '5199728320',  '1990-8-22',    1154452018, 42254908012),
+('Ana', 'Fernandes',   'f',   '5192872355',   '1980-2-2',    1104414504, 02024232313),
+('Bruna', 'Souza',   'f',   '5195245222',  '1993-4-12',    1107300418, 12312453456),
+('Carlos', 'Linhares',   'm',   '5199578228',  '1994-8-21',    2738756418, 03423189045),
+('Juliano', 'Meireles',  'm',   '5198822452',  '1985-7-16',    4530325348, 12352525245),
+('Maicon', 'Johnn',   'm',   '5191419444', '1974-10-2',    1404553418, 04533188534),
+('Jean', 'Schuchardt',   'm',   '5198452220',  '1994-6-13',    4540534638, 11241008008),
+('Diego', 'Sabka',   'm',   '5199558245', '1986-5-4',    1424383418, 02045413058),
+('Fernanda', 'Soares',  'f',   '5192528111', '1992-3-7',    1547387818, 45343787567),
+('Paula', 'Lemos',   'f',   '5192525541',  '1986-2-12',    1465732418, 02756754508),
+('Suelen', 'Silva',   'f',   '5195358225',  '1995-4-30',    1121243418, 45153858456);
 
 -- Inserindo Tipos de quartos
 INSERT INTO tb_tipos
