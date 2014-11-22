@@ -1,0 +1,19 @@
+<?php
+
+//Variável (pegando do GET, por exemplo)
+$var = "User', email='test";
+
+//Conectar no banco
+$pdo = new PDO("mysql:host=localhost;dbname=database;", "root", "");
+
+//Prepara o query, usando :values
+$sql = $pdo->prepare("UPDATE users SET user=:nome");
+
+//Troca os :symbol pelos valores que irão executar
+//Ao mesmo tempo protege esses valores de injection
+$sql->bindParam(":nome", $var);
+
+//Executa o sql
+$sql->execute();
+
+?>
