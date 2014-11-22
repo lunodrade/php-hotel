@@ -19,7 +19,7 @@
 		
 	} else {
 		if (!defined('URL')) define('URL', 'http://labs.lucianoandrade.me/hotel');
-		if (!defined('ASSETS')) define('ASSETS', 'http://labs.lucianoandrade.me/hotel/assets');
+		if (!defined('ASSETS')) define('ASSETS', 'http://127.0.0.1/hotel/assets');
 		if (!defined('ROOT')) define('ROOT', 'hotel');
 		if (!defined('DEBUG'))  define('DEBUG', FALSE);
 
