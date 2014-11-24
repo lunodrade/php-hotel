@@ -27,20 +27,42 @@
 
 <div class="inner cover">
    
-   
-   
-   
-   
-   
-   
-   
     <h1>Crie uma conta</h1>
     
     
     
     <form id="signupform" class="form-horizontal" role="form" action="functions.php?acao=salvar" method="post">
-
-
+    
+<!--
+    <div class="form-group">
+        <label for="email">Email</label>
+         <div class="col-md-9">
+            <input class="form-control" required id="email" name="email" type="email"  placeholder="Digite o email" /><br>
+-->
+<!--
+        </div>
+        <table class="table">
+            <tr>
+            <td>
+                <div class="col-md-9">
+                <button   class="btn btn-info"
+class="icon-hand-right" id="btnCheck" class="btnCheck">Verificar disponibilidade</button>  
+                
+                 </div>    
+            </td>
+            <td>
+                <div class="form-group" id="avaibleResult" style="
+            width: 300px;
+            height: 50px;
+            background-color: lightgray;
+            padding: 15px 0 10px 30px;
+            "></div>
+            </td>
+            </tr>
+        </table>
+    </div>
+-->
+        
 
     <div class="form-group">
         <label for="firstname" class="col-md-3 control-label">Nome</label>
@@ -74,12 +96,14 @@
         </div>
     </div>
 
+
     <div class="form-group">
         <label for="email" class="col-md-3 control-label">Email</label>
         <div class="col-md-9">
             <input type="text" class="form-control" name="email" placeholder="Email">
         </div>
     </div>
+
     
     
     <div class="form-group">
@@ -117,33 +141,81 @@
         </div>
     </div>
 
-
-
-
-
     </form>
     
     
-    
-    
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </div>
+
+
+
+
+
+
+<!-- ********************************************* -->
+<!--
+        	<script type="text/javascript">
+    	jQuery(document).ready(function($) {
+    		$('.btnCheck').click(function(){
+    		// e.preventDefault();
+                makeAjaxRequest();
+                return false;
+    		});
+
+            $('email').click(function(e){
+               // e.preventDefault();
+                makeAjaxRequest();
+                return false;
+            });
+            
+            $('form').submit(function(e){
+               // e.preventDefault();
+            // makeAjaxRequest();
+                return false;
+            });
+                        
+            
+
+            function makeAjaxRequest() {
+                $.ajax({
+                    url: '../ajax/checkAvailability.php',
+                    type: 'get',
+                    data: {email: $('input#email').val()},
+                    success: function(response) {
+                        $('#avaibleResult').html(response);
+                    }
+                });
+            }
+    	});
+    </script>
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <?php  include '../_footer.php';  ?>
