@@ -59,11 +59,7 @@ class Cadastro extends ConfigController
                 
 				
    
-<<<<<<< HEAD
-         $id = $this->conn->lastInsertId(); 
-=======
         $id = $this->conn->lastInsertId(); 
->>>>>>> origin/master
         header("Location: ". URL . '/auth/sendmail_confirmation.php?user='.$id);
         
 	}

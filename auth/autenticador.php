@@ -46,29 +46,8 @@ class AutenticadorEmBanco extends Autenticador {
         header('location: controle.php?acao=sair');
     }
 
-<<<<<<< HEAD
-    public function logar($email, $senha) {
-        /*
-        //Conectar no banco
-        $pdo = new PDO("mysql:host=localhost;dbname=database;", "root", "");
-        $pdo->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-
-        //Prepara o query, usando :values
-        $sql = $pdo->prepare("UPDATE users SET user=:nome");
-
-        //Troca os :symbol pelos valores que irão executar
-        //Ao mesmo tempo protege esses valores de injection
-        $sql->bindParam(":nome", $var);
-
-        //Executa o sql
-        $sql->execute();
-        */
-        
-        //$pdo = new PDO('mysql:dbname=projectCake;host=localhost', 'root', '');
-=======
     public function logar($email, $senha) {        
         //Conectar no banco
->>>>>>> origin/master
         $pdo = new PDO("mysql:host=".DBHOST.";dbname=".DBNAME."", DBUSER, DBPASS);
         $pdo->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 

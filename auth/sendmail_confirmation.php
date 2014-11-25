@@ -11,26 +11,16 @@
 
     $consulta->bindValue(":usu_cod", $_GET['user']);
 
-<<<<<<< HEAD
-    if($consulta->execute()) {
-        $linha = $consulta->fetch(PDO::FETCH_ASSOC);
-
-        echo($linha['cli_nome']);
-=======
     $consulta->execute();
         
     if($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
         echo $linha['cli_nome'];
->>>>>>> origin/master
 
         $usuario = $linha['cli_nome'];
         $destinatario = $linha['usu_email'];
 
     } else {
-<<<<<<< HEAD
-=======
         echo "morreu";
->>>>>>> origin/master
         die();
     }
 
@@ -49,10 +39,7 @@
     if($query->execute()) {
 
     } else {
-<<<<<<< HEAD
-=======
         echo "morreu";
->>>>>>> origin/master
         die();
     }
 
@@ -66,8 +53,4 @@
     $headers .= "From: <hotel@lucianoandrade.me>" . "\r\n";
 
     mail($destinatario, $assunto, $email, $headers);
-<<<<<<< HEAD
 ?>
-=======
-?>
->>>>>>> origin/master
