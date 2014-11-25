@@ -26,8 +26,7 @@ switch($_REQUEST['acao']) {
             }
         }
         else {
-            # envia o usuário de volta para 
-            # o form de login
+            # envia o usuário de volta para o form de login
             header('location: login.php');
         }
         

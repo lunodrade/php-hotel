@@ -17,20 +17,25 @@ if ($aut->esta_logado()) {
 
 $set_redirect = true;
 
+//Testa se há a chave "redirect" na url; se houver, não gravar o redirecionamento
 if(isset($_REQUEST['redirect']) and !empty($_REQUEST['redirect']))
     $set_redirect = false;
 
+//Testa de que página está vindo, algumas não gravam o redirecionamento
 if(isset($_SERVER['HTTP_REFERER'])) {
     if(preg_match("/^.*auth\/login.php$/", $_SERVER['HTTP_REFERER']))
         $set_redirect = false;
 
     if(preg_match("/^.*auth\/login.php\?redirect\=true$/", $_SERVER['HTTP_REFERER']))
         $set_redirect = false;
+    
+    if(preg_match("/^.*auth\/unconfirmed_email.php$/", $_SERVER['HTTP_REFERER']))
+        $set_redirect = false;
 } else {
     $set_redirect = false;
 }
 
-
+//Gravar a página que estava antes do login, pois após logar irá ser redirecionado de volta para lá
 if($set_redirect) {
     $sess = Sessao::instanciar();
     $sess->set('uri', $_SERVER['HTTP_REFERER']);
