@@ -46,65 +46,57 @@ class AutenticadorEmBanco extends Autenticador {
         header('location: controle.php?acao=sair');
     }
 
-    public function logar($email, $senha) {
-        /*
+    public function logar($email, $senha) {        
         //Conectar no banco
-        $pdo = new PDO("mysql:host=localhost;dbname=database;", "root", "");
+        $pdo = new PDO("mysql:host=".DBHOST.";dbname=".DBNAME."", DBUSER, DBPASS);
         $pdo->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 
         //Prepara o query, usando :values
-        $sql = $pdo->prepare("UPDATE users SET user=:nome");
-
+        $consulta = $pdo->prepare("SELECT *
+                              FROM tb_usuarios
+                              WHERE usu_email = :email AND
+                                    usu_senha = :senha;");
+        
         //Troca os :symbol pelos valores que irão executar
         //Ao mesmo tempo protege esses valores de injection
-        $sql->bindParam(":nome", $var);
+        $consulta->bindValue(":email", $email);
+        $consulta->bindValue(":senha", $senha);
 
         //Executa o sql
-        $sql->execute();
-        */
-        
-        //$pdo = new PDO('mysql:dbname=projectCake;host=localhost', 'root', '');
-        $pdo = new PDO("mysql:host=".DBHOST.";dbname=".DBNAME."", DBUSER, DBPASS);
-        $sess = Sessao::instanciar();
-        
-        $sql = "select * 
-               from tb_usuarios
-               where usu_email ='{$email}' and
-                   usu_senha = '{$senha}'";
-                   
-        $stm = $pdo->query($sql);
-        
-        
-//CREATE TABLE tb_usuarios (
-//    pk_usu_cod int    NOT NULL  AUTO_INCREMENT,
-//    usu_email varchar(100)    NOT NULL ,
-//    usu_senha varchar(50)    NOT NULL ,
-//    usu_tipo varchar(20)    NOT NULL ,
-//    usu_conf bool    NOT NULL ,
-//    usu_hash varchar(100)    NOT NULL ,
-//    fk_cli_cod int    NULL ,
-//    CONSTRAINT tb_usuarios_pk PRIMARY KEY (pk_usu_cod)
-//);
-        
-        if ($stm->rowCount() > 0) {
-        
-            $dados = $stm->fetch(PDO::FETCH_ASSOC);
-
-            $usuario = new Usuario();
-            $usuario->setId($dados['pk_usu_cod']);
-            $usuario->setEmail($dados['usu_email']);
-            $usuario->setSenha($dados['usu_senha']);
-            $usuario->setTipo($dados['usu_tipo']);
-            $usuario->setCliente($dados['fk_cli_cod']);
-
-            $sess->set('usuario', $usuario);
-            return true;
+        $consulta->execute();
             
-        }
-        else {
+        if($dados = $consulta->fetch(PDO::FETCH_ASSOC)) {
+
+            if($dados['usu_conf'] == 1) {
+                $usuario = new Usuario();
+                $usuario->setId($dados['pk_usu_cod']);
+                $usuario->setEmail($dados['usu_email']);
+                $usuario->setSenha($dados['usu_senha']);
+                $usuario->setTipo($dados['usu_tipo']);
+                $usuario->setCliente($dados['fk_cli_cod']);
+
+                $sess = Sessao::instanciar();
+                $sess->set('usuario', $usuario);
+
+                return true;
+            } else {
+                //echo "usu&aacute;rio ainda n&atilde;o confirmado, sorry";
+                //echo '<br><br><input type="button" value="Reload Page" onClick="history.go(0)">';
+                // TODO: tentar com setTimeout pra history.go(0)
+                //echo "<script type='text/javascript'>setTimeout(function(){ history.go(0); }, 5000);</script>";
+                //die();
+                
+                $sess = Sessao::instanciar();
+                $sess->set('email', $email);
+                $sess->set('senha', $senha);
+                
+                header('location: unconfirmed_email.php');
+                die();
+            }
+            
+        } else {
             return false;
         }
-        
     }
 
     public function pegar_usuario() {
