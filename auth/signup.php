@@ -42,7 +42,6 @@
     
     <form id="signupform" class="form-horizontal" role="form" action="functions.php?acao=salvar" method="post">
     
-<<<<<<< HEAD
 
 <!--
     <div class="form-group">
@@ -63,13 +62,6 @@
         </div>
                
     </div>
-=======
-<!--
-    <div class="form-group">
-        <label for="email">Email</label>
-         <div class="col-md-9">
-            <input class="form-control" required id="email" name="email" type="email"  placeholder="Digite o email" /><br>
->>>>>>> origin/master
 -->
 <!--
         </div>
@@ -142,19 +134,7 @@ class="icon-hand-right" id="btnCheck" class="btnCheck">Verificar disponibilidade
     </div>
 
 
-<<<<<<< HEAD
 
-=======
-    <div class="form-group">
-        <label for="email" class="col-md-3 control-label">Email</label>
-        <div class="col-md-9">
-            <input type="text" class="form-control" name="email" placeholder="Email">
-        </div>
-    </div>
-
-    
-    
->>>>>>> origin/master
     <div class="form-group">
         <label for="password" class="col-md-3 control-label">Senha</label>
         <div class="col-md-9">
@@ -201,11 +181,7 @@ class="icon-hand-right" id="btnCheck" class="btnCheck">Verificar disponibilidade
 
 
 <!-- ********************************************* -->
-<<<<<<< HEAD
 
-=======
-<!--
->>>>>>> origin/master
         	<script type="text/javascript">
     	jQuery(document).ready(function($) {
     		$('.btnCheck').click(function(){
@@ -214,7 +190,6 @@ class="icon-hand-right" id="btnCheck" class="btnCheck">Verificar disponibilidade
                 return false;
     		});
 
-<<<<<<< HEAD
                         
 //            $('form').submit(function(e){
 //               // e.preventDefault();
@@ -225,21 +200,6 @@ class="icon-hand-right" id="btnCheck" class="btnCheck">Verificar disponibilidade
             $('#email').change(function() {
                 makeAjaxRequest();
             })
-=======
-            $('email').click(function(e){
-               // e.preventDefault();
-                makeAjaxRequest();
-                return false;
-            });
-            
-            $('form').submit(function(e){
-               // e.preventDefault();
-            // makeAjaxRequest();
-                return false;
-            });
-                        
-            
->>>>>>> origin/master
 
             function makeAjaxRequest() {
                 $.ajax({
@@ -247,26 +207,18 @@ class="icon-hand-right" id="btnCheck" class="btnCheck">Verificar disponibilidade
                     type: 'get',
                     data: {email: $('input#email').val()},
                     success: function(response) {
-<<<<<<< HEAD
                         if(response == "<p>Disponivel</p>") {
                             $('.btnCheck').removeClass('btn-default btn-danger').addClass('btn-success');
                             
                         } else {
                             $('.btnCheck').removeClass('btn-default btn-success').addClass('btn-danger');
                         }
-=======
-                        $('#avaibleResult').html(response);
->>>>>>> origin/master
                     }
                 });
             }
     	});
     </script>
-<<<<<<< HEAD
 
-=======
--->
->>>>>>> origin/master
 
 
 
