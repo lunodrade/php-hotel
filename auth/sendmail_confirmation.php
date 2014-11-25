@@ -11,15 +11,16 @@
 
     $consulta->bindValue(":usu_cod", $_GET['user']);
 
-    if($consulta->execute()) {
-        $linha = $consulta->fetch(PDO::FETCH_ASSOC);
-
-        echo($linha['cli_nome']);
+    $consulta->execute();
+        
+    if($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
+        echo $linha['cli_nome'];
 
         $usuario = $linha['cli_nome'];
         $destinatario = $linha['usu_email'];
 
     } else {
+        echo "morreu";
         die();
     }
 
@@ -38,6 +39,7 @@
     if($query->execute()) {
 
     } else {
+        echo "morreu";
         die();
     }
 
