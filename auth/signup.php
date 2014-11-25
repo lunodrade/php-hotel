@@ -46,7 +46,7 @@
     <div class="form-group">
         <label for="firstname" class="col-md-3 control-label">Nome</label>
         <div class="col-md-9">
-            <input pattern="[A-Z]{1}[a-z]*" 
+            <input pattern="[A-Z]{1}[a-z]*" title="sse"
             type="text"  class="form-control" required name="nome" placeholder="Primeiro nome">
         </div>
     </div>
@@ -122,7 +122,7 @@
        <div class="form-group">
         <label for="datanasc" class="col-md-3 control-label">Data Nacimento</label>
         <div class="col-md-9">
-            <input required
+            <input required pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}"
             type="date" class="form-control" name="datanasc" placeholder="Data de Nascimento">
         </div>
     </div>
