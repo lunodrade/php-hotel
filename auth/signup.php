@@ -43,62 +43,19 @@
     <form id="signupform" class="form-horizontal" role="form" action="functions.php?acao=salvar" method="post">
     
 
-<!--
-    <div class="form-group">
-         <label for="email" class="col-md-3 control-label">Email</label>
-         <div class="col-md-9">
-            <input class="form-control" required id="email" name="email" type="email"  placeholder="Digite o email" /><br>
-
-     </div>
-      </div>
-    <div class="form-group">
-        <div class="col-md-6">
-           <button   class="btn btn-info" class="icon-hand-right" id="btnCheck" class="btnCheck">Verificar disponibilidade</button>  
-        </div>    
-        <div class="col-md-6" id="avaibleResult" style="
-                    height: 27.33px;
-                    background-color: lightgray;">
-                        
-        </div>
-               
-    </div>
--->
-<!--
-        </div>
-        <table class="table">
-            <tr>
-            <td>
-                <div class="col-md-9">
-                <button   class="btn btn-info"
-class="icon-hand-right" id="btnCheck" class="btnCheck">Verificar disponibilidade</button>  
-                
-                 </div>    
-            </td>
-            <td>
-                <div class="form-group" id="avaibleResult" style="
-            width: 300px;
-            height: 50px;
-            background-color: lightgray;
-            padding: 15px 0 10px 30px;
-            "></div>
-            </td>
-            </tr>
-        </table>
-    </div>
--->
-        
-
     <div class="form-group">
         <label for="firstname" class="col-md-3 control-label">Nome</label>
         <div class="col-md-9">
-            <input type="text" class="form-control" name="nome" placeholder="Primeiro nome">
+            <input pattern="[A-Z]{1}[a-z]*" 
+            type="text"  class="form-control" required name="nome" placeholder="Primeiro nome">
         </div>
     </div>
 
     <div class="form-group">
         <label for="lastname" class="col-md-3 control-label">Sobrenome</label>
         <div class="col-md-9">
-            <input type="text" class="form-control" name="sobrenome" placeholder="Sobrenome">
+            <input    pattern="[A-Z]{1}[a-z]*" required
+            type="text" class="form-control" name="sobrenome" placeholder="Sobrenome">
         </div>
     </div>
     
@@ -107,7 +64,8 @@ class="icon-hand-right" id="btnCheck" class="btnCheck">Verificar disponibilidade
       <div class="form-group">
          <label for="email" class="col-md-3 control-label">Email</label>
          <div class="col-md-7">
-            <input class="form-control" required id="email" name="email" type="email"  placeholder="Digite o email" />
+            <input pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+            class="form-control" required id="email" name="email" type="email"  placeholder="Digite o email" />
           </div>
                <div class="col-md-2">
                 <button class="btnCheck btn btn-default">check</button>
@@ -116,9 +74,17 @@ class="icon-hand-right" id="btnCheck" class="btnCheck">Verificar disponibilidade
     
     
     <div class="form-group">
+        <label for="password" class="col-md-3 control-label">Senha</label>
+        <div class="col-md-9">
+            <input type="password" required class="form-control" name="senha" placeholder="Senha">
+        </div>
+    </div>
+    
+    <div class="form-group">
     <label for="sexo" class="col-md-3 control-label">Sexo</label>
     <div class="col-md-9">
-        <select  name="sexo" class="form-control">
+        <select  name="sexo" required class="form-control">
+            <option value=""></option>
             <option value="m">Masculino</option>
             <option value="f">Feminino</option>
                             
@@ -129,37 +95,35 @@ class="icon-hand-right" id="btnCheck" class="btnCheck">Verificar disponibilidade
     <div class="form-group">
         <label for="lastname" class="col-md-3 control-label">Telefone</label>
         <div class="col-md-9">
-        <input type="number" class="form-control" name="telefone" placeholder="Telefone">
+        <input  pattern="[0-9]{2}[0-9]{8,9}"     
+        type="tel" required class="form-control" name="telefone" placeholder="Telefone">
         </div>
     </div>
 
 
 
-    <div class="form-group">
-        <label for="password" class="col-md-3 control-label">Senha</label>
-        <div class="col-md-9">
-            <input type="password" class="form-control" name="senha" placeholder="Senha">
-        </div>
-    </div>
 
    <div class="form-group">
         <label for="rg" class="col-md-3 control-label">RG</label>
         <div class="col-md-9">
-            <input type="number" class="form-control" name="rg" placeholder="RG">
+            <input required pattern="[0-9]{10}"
+             type="number" class="form-control" name="rg" placeholder="RG">
         </div>
     </div>
     
        <div class="form-group">
         <label for="cpf" class="col-md-3 control-label">CPF</label>
         <div class="col-md-9">
-            <input type="number" class="form-control" name="cpf" placeholder="CPF">
+            <input required pattern="[0-9]{11}"
+            type="number" class="form-control" name="cpf" placeholder="CPF">
         </div>
     </div>
     
        <div class="form-group">
         <label for="datanasc" class="col-md-3 control-label">Data Nacimento</label>
         <div class="col-md-9">
-            <input type="date" class="form-control" name="datanasc" placeholder="Data de Nascimento">
+            <input required
+            type="date" class="form-control" name="datanasc" placeholder="Data de Nascimento">
         </div>
     </div>
 
@@ -191,11 +155,11 @@ class="icon-hand-right" id="btnCheck" class="btnCheck">Verificar disponibilidade
     		});
 
                         
-//            $('form').submit(function(e){
-//               // e.preventDefault();
-//                makeAjaxRequest();
-//                return false;
-//            });
+           $('form').submit(function(e){
+               // e.preventDefault();
+                //makeAjaxRequest();
+                return true;
+            });
                         
             $('#email').change(function() {
                 makeAjaxRequest();
