@@ -22,6 +22,15 @@
     .form-control:focus {
         -webkit-box-shadow: rgba(0, 0, 19, 0.0745098) 0px 17px 25px 0px inset, rgba(102, 175, 233, 0.6) 0px 0px 5px 3px;
     }
+    
+    
+    .btnCheck {
+            height: 34px;
+            width: 69px;
+            border-radius: 4px;
+        color: black;
+    }
+    
 </style>
 
 
@@ -33,11 +42,26 @@
     
     <form id="signupform" class="form-horizontal" role="form" action="functions.php?acao=salvar" method="post">
     
+
 <!--
     <div class="form-group">
-        <label for="email">Email</label>
+         <label for="email" class="col-md-3 control-label">Email</label>
          <div class="col-md-9">
             <input class="form-control" required id="email" name="email" type="email"  placeholder="Digite o email" /><br>
+
+     </div>
+      </div>
+    <div class="form-group">
+        <div class="col-md-6">
+           <button   class="btn btn-info" class="icon-hand-right" id="btnCheck" class="btnCheck">Verificar disponibilidade</button>  
+        </div>    
+        <div class="col-md-6" id="avaibleResult" style="
+                    height: 27.33px;
+                    background-color: lightgray;">
+                        
+        </div>
+               
+    </div>
 -->
 <!--
         </div>
@@ -78,7 +102,20 @@ class="icon-hand-right" id="btnCheck" class="btnCheck">Verificar disponibilidade
         </div>
     </div>
     
-   <div class="form-group">
+    
+    
+      <div class="form-group">
+         <label for="email" class="col-md-3 control-label">Email</label>
+         <div class="col-md-7">
+            <input class="form-control" required id="email" name="email" type="email"  placeholder="Digite o email" />
+          </div>
+               <div class="col-md-2">
+                <button class="btnCheck btn btn-default">check</button>
+            </div>
+     </div>
+    
+    
+    <div class="form-group">
     <label for="sexo" class="col-md-3 control-label">Sexo</label>
     <div class="col-md-9">
         <select  name="sexo" class="form-control">
@@ -97,15 +134,7 @@ class="icon-hand-right" id="btnCheck" class="btnCheck">Verificar disponibilidade
     </div>
 
 
-    <div class="form-group">
-        <label for="email" class="col-md-3 control-label">Email</label>
-        <div class="col-md-9">
-            <input type="text" class="form-control" name="email" placeholder="Email">
-        </div>
-    </div>
 
-    
-    
     <div class="form-group">
         <label for="password" class="col-md-3 control-label">Senha</label>
         <div class="col-md-9">
@@ -152,7 +181,7 @@ class="icon-hand-right" id="btnCheck" class="btnCheck">Verificar disponibilidade
 
 
 <!-- ********************************************* -->
-<!--
+
         	<script type="text/javascript">
     	jQuery(document).ready(function($) {
     		$('.btnCheck').click(function(){
@@ -161,19 +190,16 @@ class="icon-hand-right" id="btnCheck" class="btnCheck">Verificar disponibilidade
                 return false;
     		});
 
-            $('email').click(function(e){
-               // e.preventDefault();
-                makeAjaxRequest();
-                return false;
-            });
-            
-            $('form').submit(function(e){
-               // e.preventDefault();
-            // makeAjaxRequest();
-                return false;
-            });
                         
-            
+//            $('form').submit(function(e){
+//               // e.preventDefault();
+//                makeAjaxRequest();
+//                return false;
+//            });
+                        
+            $('#email').change(function() {
+                makeAjaxRequest();
+            })
 
             function makeAjaxRequest() {
                 $.ajax({
@@ -181,13 +207,18 @@ class="icon-hand-right" id="btnCheck" class="btnCheck">Verificar disponibilidade
                     type: 'get',
                     data: {email: $('input#email').val()},
                     success: function(response) {
-                        $('#avaibleResult').html(response);
+                        if(response == "<p>Disponivel</p>") {
+                            $('.btnCheck').removeClass('btn-default btn-danger').addClass('btn-success');
+                            
+                        } else {
+                            $('.btnCheck').removeClass('btn-default btn-success').addClass('btn-danger');
+                        }
                     }
                 });
             }
     	});
     </script>
--->
+
 
 
 
