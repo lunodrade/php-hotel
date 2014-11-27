@@ -21,9 +21,9 @@ include '../constantes.php';
         die();
     }
     
-  //redireciona para pagina de login apos finalizar cadastro e enviar pedido de confirmação de email
-    header("Location: ". URL . '/auth/login.php');
-
+     header("Location: ". URL . '/auth/login.php');
+    
+    //redireciona para pagina de login apos finalizar cadastro e enviar pedido de confirmação de email
     //header('javascript:window.close()');
 ?>
 <!--
