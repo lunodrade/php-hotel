@@ -1,5 +1,10 @@
-<?php
-    include '../constantes.php'; 
+
+   <?php
+   
+   
+
+
+include '../constantes.php'; 
 
     $pdo = new PDO("mysql:host=".DBHOST.";dbname=".DBNAME."", DBUSER, DBPASS);
     $pdo->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
@@ -15,4 +20,14 @@
     } else {
         die();
     }
+    
+  //redireciona para pagina de login apos finalizar cadastro e enviar pedido de confirmação de email
+    header("Location: ". URL . '/auth/login.php');
+
+    //header('javascript:window.close()');
 ?>
+<!--
+
+<script>
+window.close();
+</script>-->
