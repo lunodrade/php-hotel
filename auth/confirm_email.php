@@ -21,7 +21,7 @@ include '../constantes.php';
         die();
     }
     
-     header("Location: ". URL . '/auth/login.php');
+    header("Location: ". URL . '/auth/login.php?redirect=true');
     
     //redireciona para pagina de login apos finalizar cadastro e enviar pedido de confirmação de email
     //header('javascript:window.close()');

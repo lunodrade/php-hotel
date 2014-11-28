@@ -31,6 +31,11 @@ if(isset($_SERVER['HTTP_REFERER'])) {
     
     if(preg_match("/^.*auth\/unconfirmed_email.php$/", $_SERVER['HTTP_REFERER']))
         $set_redirect = false;
+    
+    if(preg_match("/^.*auth\/signup.php$/", $_SERVER['HTTP_REFERER']))
+        $set_redirect = false;
+    
+    
 } else {
     $set_redirect = false;
 }

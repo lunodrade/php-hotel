@@ -53,7 +53,8 @@
     $headers .= "From: <hotel@lucianoandrade.me>" . "\r\n";
 
     mail($destinatario, $assunto, $email, $headers);
+
     //redireciona para pagina de login apos finalizar cadastro e enviar pedido de confirmação de email
-    header("Location: ". URL . '/auth/login.php');
+    header("Location: ". URL . '/auth/login.php?redirect=true');
     
 ?>
