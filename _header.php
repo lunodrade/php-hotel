@@ -64,6 +64,18 @@ if ($aut->esta_logado()) {
         .goLoginBtn {
             font-size: 0.5em;
         }
+        
+        .masthead, .mastfoot {
+            position: static;
+        }
+        
+        .masthead {
+            margin-bottom: 100px;
+        }
+        
+        .mastfoot {
+            margin-top: 100px;
+        }
     </style>
     
   </head>

@@ -49,6 +49,24 @@ function getRoomList($checkIn, $checkOut) {
         overflow-y: scroll;
         overflow-x: hidden;
     }
+    @media (max-height: 480px) {
+        .fullheight-container {
+            height: 24vh;
+        }
+        .col-xs-6.description-room {
+            font-size: 0.7em;
+        }
+    }
+    
+    @media (max-height: 667px) {
+        .fullheight-container {
+            height: 43vh;
+        }
+        .col-xs-6.description-room {
+            font-size: 0.8em;
+        }
+    }
+    
     .outerFullBox {
         margin: 5% 0 5% 0;
     }
@@ -77,23 +95,6 @@ function getRoomList($checkIn, $checkOut) {
         height: 36px;
     }
     
-    @media (max-height: 480px) {
-        .fullheight-container {
-            height: 24vh;
-        }
-        .col-xs-6.description-room {
-            font-size: 0.7em;
-        }
-    }
-    
-    @media (max-height: 667px) {
-        .fullheight-container {
-            height: 43vh;
-        }
-        .col-xs-6.description-room {
-            font-size: 0.8em;
-        }
-    }
     
 </style>
 
@@ -110,7 +111,7 @@ function getRoomList($checkIn, $checkOut) {
     
 
     <h1 class="cover-heading outerFullBox">Selecione o(s) quarto(s)</h1>
-<div class="fullheight-container">
+<!--<div class="fullheight-container">-->
     
     <div class="rooms">
         <form id="quartos" action="finalizar.php" method="get">
@@ -135,7 +136,7 @@ function getRoomList($checkIn, $checkOut) {
        </form>
     </div>
 
-</div>
+<!--</div>-->
 
 
 <button id="finalize" class="outerFullBox">Prosseguir</button>

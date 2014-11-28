@@ -1,0 +1,37 @@
+== Finalizar a página /auth/signup.php para usar pattern e garantir confiabilidade dos dados
+
+== Colocar um /* block */ de comentário no início de cada arquivo, para dizer do que se trata
+    Esse block deve estar dentro do <?php pois senão pode gerar conflito
+    (aquilo que o <?php tem que ser a primeira coisa da página, e sem espaços em branco antes dele...)
+
+== Trocar todos os acessos a banco de dados para um modo seguro.
+    Visualizar o arquivo "_outros/prevenir injection.txt" para ver o modelo de uso
+    
+== Trocar os $_GET por $_POST
+    Tomar cuidado nos locais que usam function/controller, porque lá há interpretação entre GET e POST já...
+
+== Finalizar o layout para a página "page/finalizar.php"
+
+== Criar e finalizar a página "page/pagamento.php"
+
+== ? Na pasta /user/ há necessidade de um arquivo de 'controle'? É bem pouca coisa, e não tem uma lógica de ~controle~, e sim de ~model~
+
+== Finalizar o visual da página user
+    Se for ser uma tabela mesmo, poderia utilizar as bibliotecas que a parte de admin usam, e então ficar com um visual semelhante
+
+== Testar bloqueio de acesso de usuário e admin à todas páginas
+    Páginas ADMIN
+        - toda e qualquer página que fique dentro da pasta /admin/
+        - 
+    Páginas USER
+        - toda e qualquer página que fique dentro da pasta /user/
+        - /page/pagamento.php
+        - 
+        
+== Ao final do projeto, as pastas que começam com um "_" (underline) podem ser excluídas
+
+== Opção de resetar senha, enviando por email
+
+== A página /page/mostrar_quartos.php deve carregar o texto de acordo com o tipo do quarto `tip_desc`, e a imagem de acordo com o número do quarto
+
+== 
