@@ -1,20 +1,55 @@
 <?php
 
-//Variável (pegando do GET, por exemplo)
-$var = "User', email='test";
+===================================== SELECT ==================================
 
 //Conectar no banco
-$pdo = new PDO("mysql:host=localhost;dbname=database;", "root", "");
+$pdo = new PDO("mysql:host=".DBHOST.";dbname=".DBNAME."", DBUSER, DBPASS);
 $pdo->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 
 //Prepara o query, usando :values
-$sql = $pdo->prepare("UPDATE users SET user=:nome");
+$consulta = $pdo->prepare("SELECT cli_nome 
+                           FROM tb_clientes
+                           WHERE pk_cli_cod = :cli_cod;");
 
 //Troca os :symbol pelos valores que irão executar
 //Ao mesmo tempo protege esses valores de injection
-$sql->bindParam(":nome", $var);
+//$consulta->bindValue(":cli_cod", $_GET['cod']);       //Pode ser assim também
+$consulta->bindValue(":cli_cod", $usuario->getCliente());
 
 //Executa o sql
-$sql->execute();
+$consulta->execute();
+
+if ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
+    //Trabalhar com os resultados
+    echo($linha['cli_nome']);
+} else {
+    echo "erro";
+    die();
+}
+
+=============================== UPDATE ou INSERT ==============================
+
+//Conectar no banco
+$pdo = new PDO("mysql:host=".DBHOST.";dbname=".DBNAME."", DBUSER, DBPASS);
+$pdo->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+
+$query = $pdo->prepare("UPDATE tb_usuarios
+                        SET usu_hash = :hash
+                        WHERE pk_usu_cod = :usu_cod;");
+
+//Troca os :symbol pelos valores que irão executar
+//Ao mesmo tempo protege esses valores de injection
+$query->bindValue(":hash", $hash);
+$query->bindValue(":usu_cod", $_GET['user']);
+
+//Executar o sql
+if($query->execute()) {
+    //A query foi executada com sucesso
+} else {
+    echo "erro";
+    die();
+}
+
+===============================================================================
 
 ?>

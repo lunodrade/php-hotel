@@ -1,39 +1,48 @@
-<?php  include '../_header.php';  ?>
-<?php
+<?php  
+include '../_header.php'; 
 
 function getRoomList($checkIn, $checkOut) {
+    //Conectar no banco
     $pdo = new PDO("mysql:host=".DBHOST.";dbname=".DBNAME."", DBUSER, DBPASS);
-        
-    $sql = "SELECT pk_qua_num
-            FROM tb_quartos
-            WHERE pk_qua_num NOT IN (
-                SELECT DISTINCT fk_qua_num
-                FROM tb_reservas r
-                INNER JOIN tb_quartos q ON q.pk_qua_num = r.fk_qua_num
-                WHERE q.qua_status = false
-                    OR
-                    NOT(
-                        NOT('{$checkIn}' BETWEEN res_in AND res_out)
-                        AND 
-                        NOT('{$checkOut}' BETWEEN res_in AND res_out)
-                        AND 
-                        NOT( 
-                            (res_in BETWEEN date('{$checkIn}') AND date('{$checkOut}'))
-                            AND 
-                            (res_out   BETWEEN date('{$checkIn}') AND date('{$checkOut}')) 
-                        )
-                    )
-                )
-            ORDER BY pk_qua_num ASC
-            ;";
+    $pdo->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 
-    $stm = $pdo->query($sql);
+    //Prepara o query, usando :values
+    $consulta = $pdo->prepare("SELECT pk_qua_num
+                               FROM tb_quartos
+                               WHERE pk_qua_num NOT IN (
+                                   SELECT DISTINCT fk_qua_num
+                                   FROM tb_reservas r
+                                   INNER JOIN tb_quartos q ON q.pk_qua_num = r.fk_qua_num
+                                   WHERE q.qua_status = false
+                                       OR
+                                       NOT(
+                                           NOT(:checkIn BETWEEN res_in AND res_out)
+                                           AND 
+                                           NOT(:checkOut BETWEEN res_in AND res_out)
+                                           AND 
+                                           NOT( 
+                                               (res_in BETWEEN date(:checkIn) AND date(:checkOut))
+                                               AND 
+                                               (res_out BETWEEN date(:checkIn) AND date(:checkOut)) 
+                                           )
+                                       )
+                                   )
+                               ORDER BY pk_qua_num ASC
+                               ;");
 
-    if ($stm->rowCount() > 0) {
-        $dados = $stm->fetchAll(PDO::FETCH_ASSOC);
-        return $dados;
-    }
-    else {
+    //Troca os :symbol pelos valores que irão executar
+    //Ao mesmo tempo protege esses valores de injection
+    $consulta->bindValue(":checkIn", $checkIn);
+    $consulta->bindValue(":checkOut", $checkOut);
+
+    //Executa o sql
+    $consulta->execute();
+
+    if ($linhas = $consulta->fetchAll(PDO::FETCH_ASSOC)) {
+        //Trabalhar com os resultados
+        return $linhas;
+    } else {
+        echo "erro";
         return false;
     }
 }
@@ -102,83 +111,68 @@ function getRoomList($checkIn, $checkOut) {
 
 
 <div class="inner cover">
-    
-    
-    
-    
-    
-    
-    
 
-    <h1 class="cover-heading outerFullBox">Selecione o(s) quarto(s)</h1>
-<!--<div class="fullheight-container">-->
-    
+    <h1 class="cover-hex2binading outerFullBox">Selecione o(s) quarto(s)</h1>
+    <!--<div class="fullheight-container">-->
+
     <div class="rooms">
         <form id="quartos" action="finalizar.php" method="get">
-        <?php
-        $in = preg_replace("/([0-9]{2})\/([0-9]{2})\/([0-9]{4})/", "$3-$2-$1 13:00:00", $_GET['checkIn']);
-        $out = preg_replace("/([0-9]{2})\/([0-9]{2})\/([0-9]{4})/", "$3-$2-$1 12:00:00", $_GET['checkOut']);
-        $rooms = getRoomList(date($in), date($out));
-        if($rooms != false) {
-            foreach($rooms as $room) {
-        ?>
-              <div class="row" style="border-bottom: 1px solid gray;">
-                  <div class="col-xs-4 image-room"> <img src="../assets/img/room-101.jpg" width="100%"> </div>
-                  <div class="col-xs-6 description-room"><p><?php echo $room['pk_qua_num'] ?></p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum adipisci error non tempora inventore officia dolores eligendi doloremque voluptas quisquam quibusdam illum tempore modi repudiandae iusto necessitatibus laborum, impedit ipsum.</div>
-                  <div class="col-xs-2 checkbox-room"><input type="checkbox" class="check-room" name="room[]" value="<?php echo $room['pk_qua_num'] ?>"></div>
-              </div>
-        <?php  
-            }
-        }
-        ?>
-        
+            <?php
+                $in = preg_replace("/([0-9]{2})\/([0-9]{2})\/([0-9]{4})/", "$3-$2-$1 13:00:00", $_GET['checkIn']);
+                $out = preg_replace("/([0-9]{2})\/([0-9]{2})\/([0-9]{4})/", "$3-$2-$1 12:00:00", $_GET['checkOut']);
+                $rooms = getRoomList(date($in), date($out));
+                if($rooms != false) {
+                    foreach($rooms as $room) {
+                ?>
+                <div class="row" style="border-bottom: 1px solid gray;">
+                    <div class="col-xs-4 image-room">
+                        <img src="../assets/img/room-101.jpg" width="100%">
+                    </div>
+                    <div class="col-xs-6 description-room">
+                        <p>
+                            <?php echo $room['pk_qua_num'] ?>
+                        </p>
+                        <span>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+                            Voluptatum adipisci error non tempora inventore officia dolores 
+                            eligendi doloremque voluptas quisquam quibusdam illum tempore 
+                            modi repudiandae iusto necessitatibus laborum, impedit ipsum.
+                        </span>
+                    </div>
+                    <div class="col-xs-2 checkbox-room">
+                        <input 
+                            type="checkbox" 
+                            class="check-room" 
+                            name="room[]" 
+                            value="<?php echo $room['pk_qua_num'] ?>"
+                        >
+                    </div>
+                </div>
+                <?php  
+                    }
+                }
+            ?>
             <button type="submit" id="sendRooms"></button>
-       </form>
+        </form>
     </div>
 
-<!--</div>-->
+    <!--</div>-->
 
-
-<button id="finalize" class="outerFullBox">Prosseguir</button>
-
-
-
-
+    <button id="finalize" class="outerFullBox">Prosseguir</button>
 
 </div>
-    <script type="text/javascript">
-        jQuery(document).ready(function($) {
-            
-            $("#finalize").on("click", function() {
-                if($(".check-room:checked").size() > 0) {
-                    $('#sendRooms').click();
-                } else {
-                    alert("Você precisa selecionar ao menos um quarto!");
-                }
-                
-                
-                
-            });
-            
-            
+
+<script type="text/javascript">
+    jQuery(document).ready(function($) {
+
+        $("#finalize").on("click", function() {
+            if($(".check-room:checked").size() > 0) {
+                $('#sendRooms').click();
+            } else {
+                alert("Você precisa selecionar ao menos um quarto!");
+            }
         });
-    </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    });
+</script>
 
 <?php  include '../_footer.php';  ?>

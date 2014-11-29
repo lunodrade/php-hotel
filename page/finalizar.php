@@ -1,21 +1,42 @@
 <?php  include '../_header.php';  ?>
 
 <?php
-function printValue() {
+function printValue() {    
+    //Conectar no banco
     $pdo = new PDO("mysql:host=".DBHOST.";dbname=".DBNAME."", DBUSER, DBPASS);
-        
-    $rooms = implode(", ", $_GET['room']);
+    $pdo->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+
+    //Pega o id dos quartos, e cria tantos ? bindValues para serem substituídos depois
+    $ids = $_GET['room'];
+    $rooms = implode(',', array_fill(0, count($ids), '?'));
     
-    $sql = "SELECT DISTINCT sum(t.tip_val) AS value
-            FROM tb_quartos q
-            INNER JOIN tb_tipos t ON q.fk_tip_cod = t.pk_tip_cod
-            WHERE q.pk_qua_num IN ($rooms)
-            ;";
+    //Prepara o query, usando :values
+    $consulta = $pdo->prepare("SELECT DISTINCT sum(t.tip_val) AS value
+                               FROM tb_quartos q
+                               INNER JOIN tb_tipos t ON q.fk_tip_cod = t.pk_tip_cod
+                               WHERE q.pk_qua_num IN (" . $rooms . ");");
 
-    $stm = $pdo->query($sql);
+    //Troca os :symbol pelos valores que irão executar
+    //Ao mesmo tempo protege esses valores de injection
+    //bindvalue é 1-indexed, então $k+1
+    foreach ($ids as $k => $id)
+        $consulta->bindValue(($k+1), $id);
+    
+    //Executa o sql
+    $consulta->execute();
 
-    $dados = $stm->fetch(PDO::FETCH_ASSOC);
-    echo $dados['value'];
+    if ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
+        //Trabalhar com os resultados
+        echo($linha['value']);
+    } else {
+        echo "erro";
+        die();
+    }
+    
+    
+    
+    
+    
 }
 ?>
     

@@ -80,12 +80,6 @@ class AutenticadorEmBanco extends Autenticador {
 
                 return true;
             } else {
-                //echo "usu&aacute;rio ainda n&atilde;o confirmado, sorry";
-                //echo '<br><br><input type="button" value="Reload Page" onClick="history.go(0)">';
-                // TODO: tentar com setTimeout pra history.go(0)
-                //echo "<script type='text/javascript'>setTimeout(function(){ history.go(0); }, 5000);</script>";
-                //die();
-                
                 $sess = Sessao::instanciar();
                 $sess->set('email', $email);
                 $sess->set('senha', $senha);

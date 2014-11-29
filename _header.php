@@ -95,18 +95,23 @@ if ($aut->esta_logado()) {
                     <?php 
                         if($usuario != null) {
                             if($usuario->getCliente() > 0) {
-                                $conn = new PDO("mysql:host=".DBHOST.";dbname=".DBNAME."", DBUSER, DBPASS);
-                                $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+                                $pdo = new PDO("mysql:host=".DBHOST.";dbname=".DBNAME."", DBUSER, DBPASS);
+                                $pdo->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 
-                                $sql = "select cli_nome 
-                                       from tb_clientes
-                                       where pk_cli_cod = {$usuario->getCliente()};";
+                                //Prepara o query, usando :values
+                                $consulta = $pdo->prepare("SELECT cli_nome 
+                                                           FROM tb_clientes
+                                                           WHERE pk_cli_cod = :cli_cod;");
 
-                                $stm = $conn->query($sql);
+                                //Troca os :symbol pelos valores que irão executar
+                                //Ao mesmo tempo protege esses valores de injection
+                                $consulta->bindValue(":cli_cod", $usuario->getCliente());
 
-                                if ($stm->rowCount() > 0) {
-                                    $dados = $stm->fetch(PDO::FETCH_ASSOC);
-                                    echo($dados['cli_nome']);
+                                //Executa o sql
+                                $consulta->execute();
+
+                                if ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                                    echo($linha['cli_nome']);
                                 }
                             } else {
                                 echo('Administrador');

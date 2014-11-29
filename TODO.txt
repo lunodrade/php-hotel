@@ -1,14 +1,34 @@
+=================== COISAS EM ANDAMENTO
+
+@luciano
+
+== Trocar todos os acessos a banco de dados para um modo seguro.
+    Visualizar o arquivo "_outros/prevenir injection.txt" para ver o modelo de uso
+    
+    Já modificadas:
+        _header.php
+        /user/index.php
+        /page/*
+        /auth/ (todas com exceção de cadastro.php)
+    Falta:
+        /auth/cadastro.php
+        /admin/*
+    
+    
+
+=================== COISAS PRA INICIAR A FAZER
+
+== Conferir os parametros passados dos FORM
+    Há alguns que passam acao=logar, por exemplo, sem necessidade
+
 == Finalizar a página /auth/signup.php para usar pattern e garantir confiabilidade dos dados
 
 == Colocar um /* block */ de comentário no início de cada arquivo, para dizer do que se trata
     Esse block deve estar dentro do <?php pois senão pode gerar conflito
     (aquilo que o <?php tem que ser a primeira coisa da página, e sem espaços em branco antes dele...)
 
-== Trocar todos os acessos a banco de dados para um modo seguro.
-    Visualizar o arquivo "_outros/prevenir injection.txt" para ver o modelo de uso
-    
-== Trocar os $_GET por $_POST
-    Tomar cuidado nos locais que usam function/controller, porque lá há interpretação entre GET e POST já...
+== ? Trocar os $_GET por $_POST
+     Tomar cuidado nos locais que usam function/controller, porque lá há interpretação entre GET e POST já...
 
 == Finalizar o layout para a página "page/finalizar.php"
 
