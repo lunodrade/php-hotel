@@ -16,12 +16,13 @@ include '../constantes.php';
     $query->bindValue(":hash", $_GET['hash']);
 
     if($query->execute()) {
-
+        echo "<script>window.close();</script>";
     } else {
+        echo "erro";
         die();
     }
     
-    header("Location: ". URL . '/auth/login.php?redirect=true');
+    //header("Location: ". URL . '/auth/login.php?redirect=true');
     
     //redireciona para pagina de login apos finalizar cadastro e enviar pedido de confirmação de email
     //header('javascript:window.close()');

@@ -15,12 +15,17 @@ class Controller extends ConfigController
 			
 			if(isset($_POST) && !empty($_POST)) {
 
-				$data = $this->conn->prepare("INSERT INTO tb_usuarios (usu_email,usu_senha,usu_tipo,usu_conf,usu_hash,fk_cli_cod) VALUES ('".$_POST["usu_email"]."', '".$_POST["usu_senha"]."', '".$_POST["usu_tipo"]."', '".$_POST["usu_conf"]."', '".$_POST["usu_hash"]."', '".$_POST["fk_cli_cod"]."')");
+				
+				if(isset($_POST["fk_cli_cod"]) and !empty($_POST["fk_cli_cod"])) {
+					$data = $this->conn->prepare("INSERT INTO tb_usuarios (usu_nome,usu_email,usu_senha,usu_tipo,fk_cli_cod) VALUES ('".$_POST["usu_nome"]."', '".$_POST["usu_email"]."', '".$_POST["usu_senha"]."', '".$_POST["usu_tipo"]."', '".$_POST["fk_cli_cod"]."')");
+				} else {
+					$data = $this->conn->prepare("INSERT INTO tb_usuarios (usu_nome,usu_email,usu_senha,usu_tipo) VALUES ('".$_POST["usu_nome"]."', '".$_POST["usu_email"]."', '".$_POST["usu_senha"]."', '".$_POST["usu_tipo"]."')");
+				}
 
 				if ($data->execute()) {
-					$_SESSION['sucess']  = 'Registro cadastrado com sucesso!';
+					$_SESSION['sucess']  = 'Registro cadastrado com sucesso! Oi 2!';
 				} else {
-					$_SESSION['error']   = 'Erro ao cadastrar registro!';
+					$_SESSION['error']   = 'Erro ao cadastrar registro! AQUI';
 				}
 			}
 
@@ -41,10 +46,16 @@ class Controller extends ConfigController
 		try {
 
 			if(isset($_POST) && !empty($_POST)) {
-				$data = $this->conn->prepare("UPDATE tb_usuarios SET usu_email = '".$_POST['usu_email']."', usu_senha = '".$_POST['usu_senha']."', usu_tipo = '".$_POST['usu_tipo']."', usu_conf = '".$_POST['usu_conf']."', usu_hash = '".$_POST['usu_hash']."', fk_cli_cod = '".$_POST['fk_cli_cod']."' WHERE pk_usu_cod = ".$id."");
+				
+                
+				if(isset($_POST["fk_cli_cod"]) and !empty($_POST["fk_cli_cod"])) {
+					$data = $this->conn->prepare("UPDATE tb_usuarios SET usu_nome = '".$_POST['usu_nome']."', usu_email = '".$_POST['usu_email']."', usu_senha = '".$_POST['usu_senha']."', usu_tipo = '".$_POST['usu_tipo']."', fk_cli_cod = '".$_POST['fk_cli_cod']."' WHERE pk_usu_cod = ".$id."");
+				} else {
+					$data = $this->conn->prepare("UPDATE tb_usuarios SET usu_nome = '".$_POST['usu_nome']."', usu_email = '".$_POST['usu_email']."', usu_senha = '".$_POST['usu_senha']."', usu_tipo = '".$_POST['usu_tipo']."' WHERE pk_usu_cod = ".$id."");
+				}
 
 				if ($data->execute()) {
-					$_SESSION['sucess']  = 'Registro atualizado com sucesso!';
+					$_SESSION['sucess']  = 'Registro atualizado com sucesso! Oi!';
 				} else {
 					$_SESSION['error']   = 'Erro ao atualizar registro!';
 				}
@@ -131,4 +142,3 @@ if(class_exists('Controller') && !isset($class))
 }
 
 ?>
-		

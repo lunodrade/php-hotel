@@ -33,6 +33,7 @@ if ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
 $pdo = new PDO("mysql:host=".DBHOST.";dbname=".DBNAME."", DBUSER, DBPASS);
 $pdo->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 
+//Prepara o query, usando :values
 $query = $pdo->prepare("UPDATE tb_usuarios
                         SET usu_hash = :hash
                         WHERE pk_usu_cod = :usu_cod;");

@@ -15,7 +15,7 @@ class Controller extends ConfigController
 			
 			if(isset($_POST) && !empty($_POST)) {
 
-				$data = $this->conn->prepare("INSERT INTO tb_clientes (cli_nome,cli_sobr,cli_sexo,cli_tel,cli_nasc,cli_rg,cli_cpf) VALUES ('".$_POST["cli_nome"]."', '".$_POST["cli_sobr"]."', '".$_POST["cli_sexo"]."', '".$_POST["cli_tel"]."', '".$_POST["cli_nasc"]."', '".$_POST["cli_rg"]."', '".$_POST["cli_cpf"]."')");
+				$data = $this->conn->prepare("INSERT INTO tb_reservas (res_in,res_out,res_val,fk_qua_num,fk_cli_cod) VALUES ('".$_POST["res_in"]."', '".$_POST["res_out"]."', '".$_POST["res_val"]."', '".$_POST["fk_qua_num"]."', '".$_POST["fk_cli_cod"]."')");
 
 				if ($data->execute()) {
 					$_SESSION['sucess']  = 'Registro cadastrado com sucesso!';
@@ -33,7 +33,7 @@ class Controller extends ConfigController
 			}
 		}
 
-		header("Location: ". URL . DS . 'admin' . DS . 'tb_clientes');
+		header("Location: ". URL . DS . 'admin' . DS . 'tb_reservas');
 	}
 
 	public function atualizar($id)
@@ -41,7 +41,7 @@ class Controller extends ConfigController
 		try {
 
 			if(isset($_POST) && !empty($_POST)) {
-				$data = $this->conn->prepare("UPDATE tb_clientes SET cli_nome = '".$_POST['cli_nome']."', cli_sobr = '".$_POST['cli_sobr']."', cli_sexo = '".$_POST['cli_sexo']."', cli_tel = '".$_POST['cli_tel']."', cli_nasc = '".$_POST['cli_nasc']."', cli_rg = '".$_POST['cli_rg']."', cli_cpf = '".$_POST['cli_cpf']."' WHERE pk_cli_cod = ".$id."");
+				$data = $this->conn->prepare("UPDATE tb_reservas SET res_in = '".$_POST['res_in']."', res_out = '".$_POST['res_out']."', res_val = '".$_POST['res_val']."', fk_qua_num = '".$_POST['fk_qua_num']."', fk_cli_cod = '".$_POST['fk_cli_cod']."' WHERE pk_res_cod = ".$id."");
 
 				if ($data->execute()) {
 					$_SESSION['sucess']  = 'Registro atualizado com sucesso!';
@@ -50,13 +50,13 @@ class Controller extends ConfigController
 				}
 
 			} else {
-				$data = $this->conn->prepare("SELECT * FROM tb_clientes WHERE pk_cli_cod = ".$id."");
+				$data = $this->conn->prepare("SELECT * FROM tb_reservas WHERE pk_res_cod = ".$id."");
 
 				$data->execute();
 	
 				$result = $this->listaCombo();
 
-				$result['tb_clientes'] = $data->fetch(PDO::FETCH_ASSOC);
+				$result['tb_reservas'] = $data->fetch(PDO::FETCH_ASSOC);
 
 				return $result;
 			}
@@ -69,14 +69,14 @@ class Controller extends ConfigController
 			}
 		}
 
-		header("Location: ". URL . DS . 'admin' . DS . 'tb_clientes');
+		header("Location: ". URL . DS . 'admin' . DS . 'tb_reservas');
 	}
 
 	public function listar()
 	{
 		try {
 			
-			$data = $this->conn->prepare("SELECT * FROM tb_clientes");
+			$data = $this->conn->prepare("SELECT * FROM tb_reservas");
 
 			$data->execute();
 
@@ -95,7 +95,7 @@ class Controller extends ConfigController
 	{
 		try {
 			
-			$data = $this->conn->prepare("DELETE FROM tb_clientes WHERE pk_cli_cod = ".$id."");
+			$data = $this->conn->prepare("DELETE FROM tb_reservas WHERE pk_res_cod = ".$id."");
 
 			if ($data->execute()) {
 				$_SESSION['sucess']  = 'Registro excluído com sucesso!';
@@ -111,14 +111,16 @@ class Controller extends ConfigController
 			}
 		}
 
-		header("Location: ". URL . DS . 'admin' . DS . 'tb_clientes');
+		header("Location: ". URL . DS . 'admin' . DS . 'tb_reservas');
 	}
 
 	public function listaCombo()
 	{
 		$data = array();
 
-		
+		$data['fk_qua_num_list']       = $this->conn->query('SELECT pk_qua_num FROM tb_quartos')->fetchAll(PDO::FETCH_ASSOC);
+$data['fk_cli_cod_list']       = $this->conn->query('SELECT pk_cli_cod FROM tb_clientes')->fetchAll(PDO::FETCH_ASSOC);
+
 
 		return $data;
 	}

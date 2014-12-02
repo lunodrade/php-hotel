@@ -1,10 +1,11 @@
 <?php
     include '../constantes.php'; 
+    include 'sessao.php'; 
 
     $pdo = new PDO("mysql:host=".DBHOST.";dbname=".DBNAME."", DBUSER, DBPASS);
     $pdo->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 
-    $consulta = $pdo->prepare("SELECT DISTINCT c.cli_nome, u.usu_email
+    $consulta = $pdo->prepare("SELECT DISTINCT c.cli_nome, u.usu_email, u.usu_senha
                               FROM tb_usuarios u
                               JOIN tb_clientes c ON c.pk_cli_cod = u.fk_cli_cod
                               WHERE u.pk_usu_cod = :usu_cod;");
@@ -18,6 +19,10 @@
 
         $usuario = $linha['cli_nome'];
         $destinatario = $linha['usu_email'];
+        
+        $sess = Sessao::instanciar();
+        $sess->set('email', $linha['usu_email']);
+        $sess->set('senha', $linha['usu_senha']);
 
     } else {
         echo "morreu";
@@ -52,9 +57,17 @@
     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
     $headers .= "From: <hotel@lucianoandrade.me>" . "\r\n";
 
-    mail($destinatario, $assunto, $email, $headers);
+    if(mail($destinatario, $assunto, $email, $headers))
+        echo "\nOk! \n";
+    else
+        echo "\nErro! \n";
+    
 
     //redireciona para pagina de login apos finalizar cadastro e enviar pedido de confirmação de email
-    header("Location: ". URL . '/auth/login.php?redirect=true');
+    //header("Location: ". URL . '/auth/login.php?redirect=true');
+
+
+    header('location: unconfirmed_email.php');
+    die();
     
 ?>

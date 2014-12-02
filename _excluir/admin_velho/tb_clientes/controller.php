@@ -15,7 +15,7 @@ class Controller extends ConfigController
 			
 			if(isset($_POST) && !empty($_POST)) {
 
-				$data = $this->conn->prepare("INSERT INTO tb_clientes (cli_nome,cli_sobr,cli_sexo,cli_tel,cli_nasc,cli_rg,cli_cpf) VALUES ('".$_POST["cli_nome"]."', '".$_POST["cli_sobr"]."', '".$_POST["cli_sexo"]."', '".$_POST["cli_tel"]."', '".$_POST["cli_nasc"]."', '".$_POST["cli_rg"]."', '".$_POST["cli_cpf"]."')");
+				$data = $this->conn->prepare("INSERT INTO tb_clientes (cli_nome,cli_nasc,cli_rg,cli_cpf) VALUES ('".$_POST["cli_nome"]."', '".$_POST["cli_nasc"]."', '".$_POST["cli_rg"]."', '".$_POST["cli_cpf"]."')");
 
 				if ($data->execute()) {
 					$_SESSION['sucess']  = 'Registro cadastrado com sucesso!';
@@ -41,7 +41,7 @@ class Controller extends ConfigController
 		try {
 
 			if(isset($_POST) && !empty($_POST)) {
-				$data = $this->conn->prepare("UPDATE tb_clientes SET cli_nome = '".$_POST['cli_nome']."', cli_sobr = '".$_POST['cli_sobr']."', cli_sexo = '".$_POST['cli_sexo']."', cli_tel = '".$_POST['cli_tel']."', cli_nasc = '".$_POST['cli_nasc']."', cli_rg = '".$_POST['cli_rg']."', cli_cpf = '".$_POST['cli_cpf']."' WHERE pk_cli_cod = ".$id."");
+				$data = $this->conn->prepare("UPDATE tb_clientes SET cli_nome = '".$_POST['cli_nome']."', cli_nasc = '".$_POST['cli_nasc']."', cli_rg = '".$_POST['cli_rg']."', cli_cpf = '".$_POST['cli_cpf']."' WHERE pk_cli_cod = ".$id."");
 
 				if ($data->execute()) {
 					$_SESSION['sucess']  = 'Registro atualizado com sucesso!';

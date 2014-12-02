@@ -9,10 +9,9 @@
         _header.php
         /user/index.php
         /page/*
-        /auth/ (todas com exceção de cadastro.php)
+        /auth/*
     Falta:
-        /auth/cadastro.php
-        /admin/*
+        /admin/*        (já foi feito backup, pode ser alterado pra modificar pra pdo:values livremente)
     
     
 
@@ -33,8 +32,6 @@
 == Finalizar o layout para a página "page/finalizar.php"
 
 == Criar e finalizar a página "page/pagamento.php"
-
-== ? Na pasta /user/ há necessidade de um arquivo de 'controle'? É bem pouca coisa, e não tem uma lógica de ~controle~, e sim de ~model~
 
 == Finalizar o visual da página user
     Se for ser uma tabela mesmo, poderia utilizar as bibliotecas que a parte de admin usam, e então ficar com um visual semelhante
