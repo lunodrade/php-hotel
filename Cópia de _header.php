@@ -1,18 +1,9 @@
 <?php 
+include 'constantes.php'; 
 
-if (!defined('__ROOT__'))  define('__ROOT__', dirname(dirname(__FILE__)));
-
-if($_SERVER['HTTP_HOST'] == '127.0.0.1') {
-	require_once __ROOT__ . '\constantes.php';
-	require_once __ROOT__ . '\auth\usuario.php';
-	require_once __ROOT__ . '\auth\sessao.php';
-	require_once __ROOT__ . '\auth\autenticador.php';
-} else {
-	require_once __ROOT__ . '/constantes.php';
-	require_once __ROOT__ . '/auth/usuario.php';
-	require_once __ROOT__ . '/auth/sessao.php';
-	require_once __ROOT__ . '/auth/autenticador.php';
-}
+require_once 'auth/usuario.php';
+require_once 'auth/sessao.php';
+require_once 'auth/autenticador.php';
 
 $aut = Autenticador::instanciar();
 
@@ -20,21 +11,13 @@ $usuario = null;
 if ($aut->esta_logado()) {
     $usuario = $aut->pegar_usuario();
 }
-
-if($_SERVER['HTTP_HOST'] == '127.0.0.1') {
-	require_once __ROOT__ . '\auth\perm_admin.php';
-} else {
-	require_once __ROOT__ . '/auth/perm_admin.php';
-}
 ?>
 
+
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Seu projeto!</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="en">
+  <head>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -44,12 +27,9 @@ if($_SERVER['HTTP_HOST'] == '127.0.0.1') {
     
     <script type="text/javascript" src="<?php echo ASSETS ?>/js/jquery.min.js"></script>
 
-    <link rel="stylesheet" href='<?php echo URL; ?>/assets/css/jquery.dataTables.css'>
-    <link rel="stylesheet" href='<?php echo URL; ?>/assets/css/dataTables.bootstrap.css'>
-    <link rel="stylesheet" href='<?php echo URL; ?>/assets/css/dataTables.tableTools.css'>
+    <title>Hotel</title>
 
     <!-- Bootstrap core CSS -->
-<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">-->
     <link href="<?php echo ASSETS ?>/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
@@ -57,7 +37,7 @@ if($_SERVER['HTTP_HOST'] == '127.0.0.1') {
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="<?php echo ASSETS ?>/js/ie-emulation-modes-warning.js"></script>
+    <script src="<?php echo ASSETS ?>/js/ie-emulation-modes-warning.js"></script><style type="text/css"></style>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -65,6 +45,7 @@ if($_SERVER['HTTP_HOST'] == '127.0.0.1') {
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     
+
     <style type="text/css">
         .site-wrapper {
         <?php 
@@ -83,104 +64,31 @@ if($_SERVER['HTTP_HOST'] == '127.0.0.1') {
         .goLoginBtn {
             font-size: 0.5em;
         }
+        
         .masthead, .mastfoot {
             position: static;
         }
         
-        .btn-group {
-            padding: 50px 0px 20px 0px;
+        .masthead {
+            margin-bottom: 100px;
         }
         
-        @media (min-width: 827px) {
-            .btn-group {
-                margin-left: -12%;
-            }
+        .mastfoot {
+            margin-top: 100px;
         }
-        .container-menu > .btn {
-            border: 2px solid rgba(25, 25, 25, .6);
-            box-shadow: 0px 5px 20px 0px rgba(25, 25, 25, 0.60);
-            background-color: rgba(25, 25, 25, 0.60);
-        }
-        
-        table.dataTable thead tr {
-            background-color: rgba(20,20,20,.5);
-        }
-        table.dataTable tbody tr {
-            background-color: rgba(50,50,50,.5);
-        }
-        .table-striped>tbody>tr:nth-child(odd) {
-            background-color: rgba(50,50,50,.5);
-        }
-        .table-hover>tbody>tr:hover {
-            background-color: rgba(100,100,100,.5);
-            }
-        
-        td:nth-child(6) {
-            width: 100px !important;
-            color: red;
-        }
-        
-        table {
-            border-collapse: collapse !important;
-        }
-
-        table, td, th {
-            border: 1px solid dimgray !important;
-        }
-        
-        .dataTables_wrapper .dataTables_length, 
-        .dataTables_wrapper .dataTables_filter, 
-        .dataTables_wrapper .dataTables_info, 
-        .dataTables_wrapper .dataTables_processing, 
-        .dataTables_wrapper .dataTables_paginate {
-            color: white;
-        }
-        
-        @media (min-width: 992px) {
-            .masthead, .mastfoot, .cover-container {
-                width: 875px;
-            }
-            td:nth-child(6) {
-                width: 100px !important;
-            }
-        }
-        @media (min-width: 1600px) {
-            .masthead, .mastfoot, .cover-container {
-                width: 1430px;
-                margin-top: 0;
-            }
-            td:nth-child(6) {
-                width: 100px !important;
-            }
-        }
-        
-        #myModal {
-            color: black;
-            text-shadow: none;
-        }
-        
-        button {
-            border-color: #ccc !important;
-        }
-        
-        button.btn-default:hover {
-            color: rgb(51, 51, 51);
-            background-color: rgb(230, 230, 230);
-            border-color: rgb(173, 173, 173);
-        }
-        
     </style>
     
-</head>
-<body>
+  </head>
 
-	
+  <body>
+
     <div class="site-wrapper">
+
       <div class="site-wrapper-inner">
+
         <div class="cover-container">
-	
-	
-	<div class="masthead clearfix">
+
+          <div class="masthead clearfix">
             <div class="inner">
               <h3 class="masthead-brand">
                   Ol&aacute;, 
@@ -255,13 +163,4 @@ if($_SERVER['HTTP_HOST'] == '127.0.0.1') {
                 </ul>
               </nav>
             </div>
-	
-	
-            <div class="btn-group container-menu">
-                <div class='btn btn-default'><a href="<?php echo URL; ?>/admin/">HOME</a></div>
-                <div class='btn btn-default'><a href='<?php  echo URL;  ?>/admin/tb_clientes/'>Tb Clientes</a></div>
-                <div class='btn btn-default'><a href='<?php  echo URL;  ?>/admin/tb_quartos/'>Tb Quartos</a></div>
-                <div class='btn btn-default'><a href='<?php  echo URL;  ?>/admin/tb_reservas/'>Tb Reservas</a></div>
-                <div class='btn btn-default'><a href='<?php  echo URL;  ?>/admin/tb_tipos/'>Tb Tipos</a></div>
-                <div class='btn btn-default'><a href='<?php  echo URL;  ?>/admin/tb_usuarios/'>Tb Usuarios</a></div>
-            </div>
+          </div>

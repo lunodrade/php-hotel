@@ -18,12 +18,12 @@
 						<thead>
 							<tr>
 								<th>Pk Usu Cod</th>
-<th>Usu Email</th>
-<th>Usu Senha</th>
-<th>Usu Tipo</th>
-<th>Usu Conf</th>
-<th>Usu Hash</th>
-<th>Fk Cli Cod</th>
+                                <th>Usu Email</th>
+                                <th>Usu Senha</th>
+                                <th>Usu Tipo</th>
+                                <th>Usu Conf</th>
+                                <th>Usu Hash</th>
+                                <th>Fk Cli Cod</th>
 
 
 								<th class="bt-padrao">Editar</th>
@@ -39,15 +39,15 @@
 								<?php foreach ($result as $key => $value) {  ?>
 									<tr>
 										<td><?php  echo $value['pk_usu_cod'];  ?></td>
-<td><?php  echo $value['usu_email'];  ?></td>
-<td><?php  echo $value['usu_senha'];  ?></td>
-<td><?php  echo $value['usu_tipo'];  ?></td>
-<td><?php  echo $value['usu_conf'];  ?></td>
-<td><?php  echo $value['usu_hash'];  ?></td>
-<td><?php  echo $value['fk_cli_cod'];  ?></td>
+                                        <td><?php  echo $value['usu_email'];  ?></td>
+                                        <td><?php  echo $value['usu_senha'];  ?></td>
+                                        <td><?php  echo $value['usu_tipo'];  ?></td>
+                                        <td><?php  echo $value['usu_conf'];  ?></td>
+                                        <td><?php  echo $value['usu_hash'];  ?></td>
+                                        <td><?php  echo $value['fk_cli_cod'];  ?></td>
 
-										<td><a href='<?php  echo URL;  ?>/admin/tb_usuarios/functions.php?acao=atualizar&id=<?php echo $value['pk_usu_cod']; ?>'><span class='glyphicon glyphicon-ok'></span></a></td>
-										<td><a href='<?php  echo URL;  ?>/admin/tb_usuarios/functions.php?acao=deletar&id=<?php echo $value['pk_usu_cod']; ?>'><span class='glyphicon glyphicon-remove'></span></a></td>
+										<td><a data-href='<?php  echo URL;  ?>/admin/tb_usuarios/functions.php?acao=atualizar&id=<?php echo $value['pk_usu_cod']; ?>'><span class='glyphicon glyphicon-ok'></span></a></td>
+										<td><a data-href='<?php  echo URL;  ?>/admin/tb_usuarios/functions.php?acao=deletar&id=<?php echo $value['pk_usu_cod']; ?>'><span class='glyphicon glyphicon-remove'></span></a></td>
 									</tr>
 								<?php } ?>
 

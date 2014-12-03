@@ -15,8 +15,20 @@ class Controller extends ConfigController
 			
 			if(isset($_POST) && !empty($_POST)) {
 
-				$data = $this->conn->prepare("INSERT INTO tb_quartos (qua_status,fk_tip_cod) VALUES ('".$_POST["qua_status"]."', '".$_POST["fk_tip_cod"]."')");
+                //Conectar no banco
+                $pdo = $this->conn;
 
+                //Prepara o query, usando :values
+                $data = $pdo->prepare("INSERT INTO tb_quartos
+                                       (qua_status, fk_tip_cod)
+                                       VALUES
+                                       (:status, :fk);");
+
+                //Troca os :symbol pelos valores que irão executar
+                //Ao mesmo tempo protege esses valores de injection
+                $data->bindValue(":status", $_POST["qua_status"]);
+                $data->bindValue(":fk",     $_POST["fk_tip_cod"]);
+                
 				if ($data->execute()) {
 					$_SESSION['sucess']  = 'Registro cadastrado com sucesso!';
 				} else {
@@ -41,7 +53,21 @@ class Controller extends ConfigController
 		try {
 
 			if(isset($_POST) && !empty($_POST)) {
-				$data = $this->conn->prepare("UPDATE tb_quartos SET qua_status = '".$_POST['qua_status']."', fk_tip_cod = '".$_POST['fk_tip_cod']."' WHERE pk_qua_num = ".$id."");
+                
+                //Conectar no banco
+                $pdo = $this->conn;
+
+                //Prepara o query, usando :values
+                $data = $pdo->prepare("UPDATE tb_quartos
+                                       SET qua_status = :status, 
+                                           fk_tip_cod = :fk
+                                       WHERE pk_qua_num = :id;");
+
+                //Troca os :symbol pelos valores que irão executar
+                //Ao mesmo tempo protege esses valores de injection
+                $data->bindValue(":status", $_POST["qua_status"]);
+                $data->bindValue(":fk",     $_POST["fk_tip_cod"]);
+                $data->bindValue(":id",     $id);
 
 				if ($data->execute()) {
 					$_SESSION['sucess']  = 'Registro atualizado com sucesso!';
@@ -50,7 +76,17 @@ class Controller extends ConfigController
 				}
 
 			} else {
-				$data = $this->conn->prepare("SELECT * FROM tb_quartos WHERE pk_qua_num = ".$id."");
+                //Conectar no banco
+                $pdo = $this->conn;
+
+                //Prepara o query, usando :values
+                $data = $pdo->prepare("SELECT *
+                                       FROM tb_quartos
+                                       WHERE pk_qua_num = :id;");
+
+                //Troca os :symbol pelos valores que irão executar
+                //Ao mesmo tempo protege esses valores de injection
+                $data->bindValue(":id", $id);
 
 				$data->execute();
 	
@@ -76,7 +112,12 @@ class Controller extends ConfigController
 	{
 		try {
 			
-			$data = $this->conn->prepare("SELECT * FROM tb_quartos");
+            //Conectar no banco
+            $pdo = $this->conn;
+
+            //Prepara o query, usando :values
+            $data = $pdo->prepare("SELECT *
+                                   FROM tb_quartos;");
 
 			$data->execute();
 
@@ -95,7 +136,17 @@ class Controller extends ConfigController
 	{
 		try {
 			
-			$data = $this->conn->prepare("DELETE FROM tb_quartos WHERE pk_qua_num = ".$id."");
+            //Conectar no banco
+            $pdo = $this->conn;
+
+            //Prepara o query, usando :values
+            $data = $pdo->prepare("DELETE 
+                                   FROM tb_quartos
+                                   WHERE pk_qua_num = :id;");
+
+            //Troca os :symbol pelos valores que irão executar
+            //Ao mesmo tempo protege esses valores de injection
+            $data->bindValue(":id", $id);
 
 			if ($data->execute()) {
 				$_SESSION['sucess']  = 'Registro excluído com sucesso!';

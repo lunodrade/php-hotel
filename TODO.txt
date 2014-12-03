@@ -10,9 +10,9 @@
         /user/index.php
         /page/*
         /auth/*
+        /admin/*
     Falta:
-        /admin/*        (já foi feito backup, pode ser alterado pra modificar pra pdo:values livremente)
-    
+        - nada -
     
 
 =================== COISAS PRA INICIAR A FAZER

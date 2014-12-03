@@ -15,7 +15,24 @@ class Controller extends ConfigController
 			
 			if(isset($_POST) && !empty($_POST)) {
 
-				$data = $this->conn->prepare("INSERT INTO tb_clientes (cli_nome,cli_sobr,cli_sexo,cli_tel,cli_nasc,cli_rg,cli_cpf) VALUES ('".$_POST["cli_nome"]."', '".$_POST["cli_sobr"]."', '".$_POST["cli_sexo"]."', '".$_POST["cli_tel"]."', '".$_POST["cli_nasc"]."', '".$_POST["cli_rg"]."', '".$_POST["cli_cpf"]."')");
+                //Conectar no banco
+                $pdo = $this->conn;
+
+                //Prepara o query, usando :values
+                $data = $pdo->prepare("INSERT INTO tb_clientes
+                                       (cli_nome, cli_sobr, cli_sexo, cli_tel, cli_nasc, cli_rg, cli_cpf)
+                                       VALUES
+                                       (:nome, :sobr, :sexo, :tel, :nasc, :rg, :cpf);");
+
+                //Troca os :symbol pelos valores que irão executar
+                //Ao mesmo tempo protege esses valores de injection
+                $data->bindValue(":nome",  $_POST["cli_nome"]);
+                $data->bindValue(":sobr",  $_POST["cli_sobr"]);
+                $data->bindValue(":sexo",  $_POST["cli_sexo"]);
+                $data->bindValue(":tel",   $_POST["cli_tel"]);
+                $data->bindValue(":nasc",  $_POST["cli_nasc"]);
+                $data->bindValue(":rg",    $_POST["cli_rg"]);
+                $data->bindValue(":cpf",   $_POST["cli_cpf"]);
 
 				if ($data->execute()) {
 					$_SESSION['sucess']  = 'Registro cadastrado com sucesso!';
@@ -41,7 +58,31 @@ class Controller extends ConfigController
 		try {
 
 			if(isset($_POST) && !empty($_POST)) {
-				$data = $this->conn->prepare("UPDATE tb_clientes SET cli_nome = '".$_POST['cli_nome']."', cli_sobr = '".$_POST['cli_sobr']."', cli_sexo = '".$_POST['cli_sexo']."', cli_tel = '".$_POST['cli_tel']."', cli_nasc = '".$_POST['cli_nasc']."', cli_rg = '".$_POST['cli_rg']."', cli_cpf = '".$_POST['cli_cpf']."' WHERE pk_cli_cod = ".$id."");
+                
+                //Conectar no banco
+                $pdo = $this->conn;
+
+                //Prepara o query, usando :values
+                $data = $pdo->prepare("UPDATE tb_clientes
+                                       SET cli_nome = :nome, 
+                                           cli_sobr = :sobr, 
+                                           cli_sexo = :sexo, 
+                                           cli_tel = :tel, 
+                                           cli_nasc = :nasc, 
+                                           cli_rg = :rg, 
+                                           cli_cpf = :cpf
+                                       WHERE pk_cli_cod = :id;");
+
+                //Troca os :symbol pelos valores que irão executar
+                //Ao mesmo tempo protege esses valores de injection
+                $data->bindValue(":nome",  $_POST["cli_nome"]);
+                $data->bindValue(":sobr",  $_POST["cli_sobr"]);
+                $data->bindValue(":sexo",  $_POST["cli_sexo"]);
+                $data->bindValue(":tel",   $_POST["cli_tel"]);
+                $data->bindValue(":nasc",  $_POST["cli_nasc"]);
+                $data->bindValue(":rg",    $_POST["cli_rg"]);
+                $data->bindValue(":cpf",   $_POST["cli_cpf"]);
+                $data->bindValue(":id",    $id);
 
 				if ($data->execute()) {
 					$_SESSION['sucess']  = 'Registro atualizado com sucesso!';
@@ -50,8 +91,18 @@ class Controller extends ConfigController
 				}
 
 			} else {
-				$data = $this->conn->prepare("SELECT * FROM tb_clientes WHERE pk_cli_cod = ".$id."");
+                //Conectar no banco
+                $pdo = $this->conn;
 
+                //Prepara o query, usando :values
+                $data = $pdo->prepare("SELECT *
+                                       FROM tb_clientes
+                                       WHERE pk_cli_cod = :id;");
+
+                //Troca os :symbol pelos valores que irão executar
+                //Ao mesmo tempo protege esses valores de injection
+                $data->bindValue(":id", $id);
+                
 				$data->execute();
 	
 				$result = $this->listaCombo();
@@ -76,7 +127,12 @@ class Controller extends ConfigController
 	{
 		try {
 			
-			$data = $this->conn->prepare("SELECT * FROM tb_clientes");
+            //Conectar no banco
+            $pdo = $this->conn;
+
+            //Prepara o query, usando :values
+            $data = $pdo->prepare("SELECT *
+                                   FROM tb_clientes;");
 
 			$data->execute();
 
@@ -95,7 +151,17 @@ class Controller extends ConfigController
 	{
 		try {
 			
-			$data = $this->conn->prepare("DELETE FROM tb_clientes WHERE pk_cli_cod = ".$id."");
+            //Conectar no banco
+            $pdo = $this->conn;
+
+            //Prepara o query, usando :values
+            $data = $pdo->prepare("DELETE 
+                                   FROM tb_clientes
+                                   WHERE pk_cli_cod = :id;");
+
+            //Troca os :symbol pelos valores que irão executar
+            //Ao mesmo tempo protege esses valores de injection
+            $data->bindValue(":id", $id);
 
 			if ($data->execute()) {
 				$_SESSION['sucess']  = 'Registro excluído com sucesso!';

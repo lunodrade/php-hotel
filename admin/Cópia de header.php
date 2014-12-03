@@ -1,3 +1,4 @@
+
 <?php 
 
 if (!defined('__ROOT__'))  define('__ROOT__', dirname(dirname(__FILE__)));
@@ -28,6 +29,7 @@ if($_SERVER['HTTP_HOST'] == '127.0.0.1') {
 }
 ?>
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,13 +45,16 @@ if($_SERVER['HTTP_HOST'] == '127.0.0.1') {
     <link rel="icon" href="<?php echo URL ?>/favicon.ico">
     
     <script type="text/javascript" src="<?php echo ASSETS ?>/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 
     <link rel="stylesheet" href='<?php echo URL; ?>/assets/css/jquery.dataTables.css'>
     <link rel="stylesheet" href='<?php echo URL; ?>/assets/css/dataTables.bootstrap.css'>
     <link rel="stylesheet" href='<?php echo URL; ?>/assets/css/dataTables.tableTools.css'>
+    <script type="text/javascript" src='<?php echo URL; ?>/assets/js/jquery.dataTables.min.js'></script>
+    <script type="text/javascript" src='<?php echo URL; ?>/assets/js/dataTables.bootstrap.js'></script>
+    <script type="text/javascript" src='<?php echo URL; ?>/assets/js/dataTables.tableTools.js'></script>
 
     <!-- Bootstrap core CSS -->
-<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">-->
     <link href="<?php echo ASSETS ?>/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
@@ -57,14 +62,13 @@ if($_SERVER['HTTP_HOST'] == '127.0.0.1') {
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="<?php echo ASSETS ?>/js/ie-emulation-modes-warning.js"></script>
+    <script src="<?php echo ASSETS ?>/js/ie-emulation-modes-warning.js"></script><style type="text/css"></style>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    
     <style type="text/css">
         .site-wrapper {
         <?php 
@@ -103,14 +107,14 @@ if($_SERVER['HTTP_HOST'] == '127.0.0.1') {
         }
         
         table.dataTable thead tr {
-            background-color: rgba(20,20,20,.5);
+          background-color: rgba(20,20,20,.5);
         }
         table.dataTable tbody tr {
-            background-color: rgba(50,50,50,.5);
+          background-color: rgba(50,50,50,.5);
         }
         .table-striped>tbody>tr:nth-child(odd) {
-            background-color: rgba(50,50,50,.5);
-        }
+background-color: rgba(50,50,50,.5);
+}
         .table-hover>tbody>tr:hover {
             background-color: rgba(100,100,100,.5);
             }
@@ -120,21 +124,17 @@ if($_SERVER['HTTP_HOST'] == '127.0.0.1') {
             color: red;
         }
         
-        table {
-            border-collapse: collapse !important;
-        }
+table {
+    border-collapse: collapse !important;
+}
 
-        table, td, th {
-            border: 1px solid dimgray !important;
-        }
+table, td, th {
+    border: 1px solid dimgray !important;
+}
         
-        .dataTables_wrapper .dataTables_length, 
-        .dataTables_wrapper .dataTables_filter, 
-        .dataTables_wrapper .dataTables_info, 
-        .dataTables_wrapper .dataTables_processing, 
-        .dataTables_wrapper .dataTables_paginate {
-            color: white;
-        }
+        .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate {
+color: white;
+}
         
         @media (min-width: 992px) {
             .masthead, .mastfoot, .cover-container {
@@ -154,21 +154,6 @@ if($_SERVER['HTTP_HOST'] == '127.0.0.1') {
             }
         }
         
-        #myModal {
-            color: black;
-            text-shadow: none;
-        }
-        
-        button {
-            border-color: #ccc !important;
-        }
-        
-        button.btn-default:hover {
-            color: rgb(51, 51, 51);
-            background-color: rgb(230, 230, 230);
-            border-color: rgb(173, 173, 173);
-        }
-        
     </style>
     
 </head>
@@ -176,8 +161,14 @@ if($_SERVER['HTTP_HOST'] == '127.0.0.1') {
 
 	
     <div class="site-wrapper">
+
       <div class="site-wrapper-inner">
+
         <div class="cover-container">
+	
+	
+	
+	
 	
 	
 	<div class="masthead clearfix">
@@ -187,23 +178,18 @@ if($_SERVER['HTTP_HOST'] == '127.0.0.1') {
                     <?php 
                         if($usuario != null) {
                             if($usuario->getCliente() > 0) {
-                                $pdo = new PDO("mysql:host=".DBHOST.";dbname=".DBNAME."", DBUSER, DBPASS);
-                                $pdo->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+                                $conn = new PDO("mysql:host=".DBHOST.";dbname=".DBNAME."", DBUSER, DBPASS);
+                                $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 
-                                //Prepara o query, usando :values
-                                $consulta = $pdo->prepare("SELECT cli_nome 
-                                                           FROM tb_clientes
-                                                           WHERE pk_cli_cod = :cli_cod;");
+                                $sql = "select cli_nome 
+                                       from tb_clientes
+                                       where pk_cli_cod = {$usuario->getCliente()};";
 
-                                //Troca os :symbol pelos valores que irão executar
-                                //Ao mesmo tempo protege esses valores de injection
-                                $consulta->bindValue(":cli_cod", $usuario->getCliente());
+                                $stm = $conn->query($sql);
 
-                                //Executa o sql
-                                $consulta->execute();
-
-                                if ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
-                                    echo($linha['cli_nome']);
+                                if ($stm->rowCount() > 0) {
+                                    $dados = $stm->fetch(PDO::FETCH_ASSOC);
+                                    echo($dados['cli_nome']);
                                 }
                             } else {
                                 echo('Administrador');
@@ -255,6 +241,18 @@ if($_SERVER['HTTP_HOST'] == '127.0.0.1') {
                 </ul>
               </nav>
             </div>
+<!--          </div>-->
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
             <div class="btn-group container-menu">
@@ -264,4 +262,24 @@ if($_SERVER['HTTP_HOST'] == '127.0.0.1') {
                 <div class='btn btn-default'><a href='<?php  echo URL;  ?>/admin/tb_reservas/'>Tb Reservas</a></div>
                 <div class='btn btn-default'><a href='<?php  echo URL;  ?>/admin/tb_tipos/'>Tb Tipos</a></div>
                 <div class='btn btn-default'><a href='<?php  echo URL;  ?>/admin/tb_usuarios/'>Tb Usuarios</a></div>
+
             </div>
+
+		<div style="padding:20px 0px 0px 0px;">
+			<?php if (isset($_SESSION['sucess'])) { ?>
+				<div class="alert alert-success">
+					<button type="button" class="close" data-dismiss="alert">×</button>
+					<?php echo $_SESSION['sucess']; ?>
+				</div>
+			<?php } ?>
+
+			<?php if (isset($_SESSION['error'])) { ?>
+				<div class="alert alert-error">
+					<button type="button" class="close" data-dismiss="alert">×</button>
+					<?php echo $_SESSION['error']; ?>
+				</div>
+			<?php } ?>
+
+		</div>
+		
+	

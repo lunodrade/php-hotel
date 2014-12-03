@@ -18,11 +18,11 @@
 						<thead>
 							<tr>
 								<th>Pk Res Cod</th>
-<th>Res In</th>
-<th>Res Out</th>
-<th>Res Val</th>
-<th>Fk Qua Num</th>
-<th>Fk Cli Cod</th>
+                                <th>Res In</th>
+                                <th>Res Out</th>
+                                <th>Res Val</th>
+                                <th>Fk Qua Num</th>
+                                <th>Fk Cli Cod</th>
 
 
 								<th class="bt-padrao">Editar</th>
@@ -38,14 +38,14 @@
 								<?php foreach ($result as $key => $value) {  ?>
 									<tr>
 										<td><?php  echo $value['pk_res_cod'];  ?></td>
-<td><?php  echo $value['res_in'];  ?></td>
-<td><?php  echo $value['res_out'];  ?></td>
-<td><?php  echo $value['res_val'];  ?></td>
-<td><?php  echo $value['fk_qua_num'];  ?></td>
-<td><?php  echo $value['fk_cli_cod'];  ?></td>
+                                        <td><?php  echo $value['res_in'];  ?></td>
+                                        <td><?php  echo $value['res_out'];  ?></td>
+                                        <td><?php  echo $value['res_val'];  ?></td>
+                                        <td><?php  echo $value['fk_qua_num'];  ?></td>
+                                        <td><?php  echo $value['fk_cli_cod'];  ?></td>
 
-										<td><a href='<?php  echo URL;  ?>/admin/tb_reservas/functions.php?acao=atualizar&id=<?php echo $value['pk_res_cod']; ?>'><span class='glyphicon glyphicon-ok'></span></a></td>
-										<td><a href='<?php  echo URL;  ?>/admin/tb_reservas/functions.php?acao=deletar&id=<?php echo $value['pk_res_cod']; ?>'><span class='glyphicon glyphicon-remove'></span></a></td>
+										<td><a data-href='<?php  echo URL;  ?>/admin/tb_reservas/functions.php?acao=atualizar&id=<?php echo $value['pk_res_cod']; ?>'><span class='glyphicon glyphicon-ok'></span></a></td>
+										<td><a data-href='<?php  echo URL;  ?>/admin/tb_reservas/functions.php?acao=deletar&id=<?php echo $value['pk_res_cod']; ?>'><span class='glyphicon glyphicon-remove'></span></a></td>
 									</tr>
 								<?php } ?>
 

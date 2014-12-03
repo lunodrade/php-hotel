@@ -15,8 +15,21 @@ class Controller extends ConfigController
 			
 			if(isset($_POST) && !empty($_POST)) {
 
-				$data = $this->conn->prepare("INSERT INTO tb_tipos (tip_nome,tip_val,tip_desc) VALUES ('".$_POST["tip_nome"]."', '".$_POST["tip_val"]."', '".$_POST["tip_desc"]."')");
+                //Conectar no banco
+                $pdo = $this->conn;
 
+                //Prepara o query, usando :values
+                $data = $pdo->prepare("INSERT INTO tb_tipos
+                                       (tip_nome, tip_val, tip_desc)
+                                       VALUES
+                                       (nome, val, desc);");
+
+                //Troca os :symbol pelos valores que irão executar
+                //Ao mesmo tempo protege esses valores de injection
+                $data->bindValue(":nome",  $_POST["tip_nome"]);
+                $data->bindValue(":val",   $_POST["tip_val"]);
+                $data->bindValue(":desc",  $_POST["tip_desc"]);
+                
 				if ($data->execute()) {
 					$_SESSION['sucess']  = 'Registro cadastrado com sucesso!';
 				} else {
@@ -41,7 +54,23 @@ class Controller extends ConfigController
 		try {
 
 			if(isset($_POST) && !empty($_POST)) {
-				$data = $this->conn->prepare("UPDATE tb_tipos SET tip_nome = '".$_POST['tip_nome']."', tip_val = '".$_POST['tip_val']."', tip_desc = '".$_POST['tip_desc']."' WHERE pk_tip_cod = ".$id."");
+                
+                //Conectar no banco
+                $pdo = $this->conn;
+
+                //Prepara o query, usando :values
+                $data = $pdo->prepare("UPDATE tb_tipos
+                                       SET tip_nome = :nome, 
+                                           tip_val = :val, 
+                                           tip_desc = :desc
+                                       WHERE pk_tip_cod = :id;");
+
+                //Troca os :symbol pelos valores que irão executar
+                //Ao mesmo tempo protege esses valores de injection
+                $data->bindValue(":nome",  $_POST["tip_nome"]);
+                $data->bindValue(":val",   $_POST["tip_val"]);
+                $data->bindValue(":desc",  $_POST["tip_desc"]);
+                $data->bindValue(":id",    $id);
 
 				if ($data->execute()) {
 					$_SESSION['sucess']  = 'Registro atualizado com sucesso!';
@@ -50,7 +79,17 @@ class Controller extends ConfigController
 				}
 
 			} else {
-				$data = $this->conn->prepare("SELECT * FROM tb_tipos WHERE pk_tip_cod = ".$id."");
+                //Conectar no banco
+                $pdo = $this->conn;
+
+                //Prepara o query, usando :values
+                $data = $pdo->prepare("SELECT *
+                                       FROM tb_tipos
+                                       WHERE pk_tip_cod = :id;");
+
+                //Troca os :symbol pelos valores que irão executar
+                //Ao mesmo tempo protege esses valores de injection
+                $data->bindValue(":id", $id);
 
 				$data->execute();
 	
@@ -76,7 +115,12 @@ class Controller extends ConfigController
 	{
 		try {
 			
-			$data = $this->conn->prepare("SELECT * FROM tb_tipos");
+            //Conectar no banco
+            $pdo = $this->conn;
+
+            //Prepara o query, usando :values
+            $data = $pdo->prepare("SELECT *
+                                   FROM tb_tipos;");
 
 			$data->execute();
 
@@ -95,7 +139,17 @@ class Controller extends ConfigController
 	{
 		try {
 			
-			$data = $this->conn->prepare("DELETE FROM tb_tipos WHERE pk_tip_cod = ".$id."");
+            //Conectar no banco
+            $pdo = $this->conn;
+
+            //Prepara o query, usando :values
+            $data = $pdo->prepare("DELETE 
+                                   FROM tb_tipos
+                                   WHERE pk_tip_cod = :id;");
+
+            //Troca os :symbol pelos valores que irão executar
+            //Ao mesmo tempo protege esses valores de injection
+            $data->bindValue(":id", $id);
 
 			if ($data->execute()) {
 				$_SESSION['sucess']  = 'Registro excluído com sucesso!';

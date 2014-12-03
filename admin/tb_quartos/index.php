@@ -18,8 +18,8 @@
 						<thead>
 							<tr>
 								<th>Pk Qua Num</th>
-<th>Qua Status</th>
-<th>Fk Tip Cod</th>
+                                <th>Qua Status</th>
+                                <th>Fk Tip Cod</th>
 
 
 								<th class="bt-padrao">Editar</th>
@@ -35,11 +35,11 @@
 								<?php foreach ($result as $key => $value) {  ?>
 									<tr>
 										<td><?php  echo $value['pk_qua_num'];  ?></td>
-<td><?php  echo $value['qua_status'];  ?></td>
-<td><?php  echo $value['fk_tip_cod'];  ?></td>
+                                        <td><?php  echo $value['qua_status'];  ?></td>
+                                        <td><?php  echo $value['fk_tip_cod'];  ?></td>
 
-										<td><a href='<?php  echo URL;  ?>/admin/tb_quartos/functions.php?acao=atualizar&id=<?php echo $value['pk_qua_num']; ?>'><span class='glyphicon glyphicon-ok'></span></a></td>
-										<td><a href='<?php  echo URL;  ?>/admin/tb_quartos/functions.php?acao=deletar&id=<?php echo $value['pk_qua_num']; ?>'><span class='glyphicon glyphicon-remove'></span></a></td>
+										<td><a data-href='<?php  echo URL;  ?>/admin/tb_quartos/functions.php?acao=atualizar&id=<?php echo $value['pk_qua_num']; ?>'><span class='glyphicon glyphicon-ok'></span></a></td>
+										<td><a data-href='<?php  echo URL;  ?>/admin/tb_quartos/functions.php?acao=deletar&id=<?php echo $value['pk_qua_num']; ?>'><span class='glyphicon glyphicon-remove'></span></a></td>
 									</tr>
 								<?php } ?>
 

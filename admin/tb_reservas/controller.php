@@ -15,7 +15,22 @@ class Controller extends ConfigController
 			
 			if(isset($_POST) && !empty($_POST)) {
 
-				$data = $this->conn->prepare("INSERT INTO tb_reservas (res_in,res_out,res_val,fk_qua_num,fk_cli_cod) VALUES ('".$_POST["res_in"]."', '".$_POST["res_out"]."', '".$_POST["res_val"]."', '".$_POST["fk_qua_num"]."', '".$_POST["fk_cli_cod"]."')");
+                //Conectar no banco
+                $pdo = $this->conn;
+
+                //Prepara o query, usando :values
+                $data = $pdo->prepare("INSERT INTO tb_reservas
+                                       (res_in, res_out, res_val, fk_qua_num, fk_cli_cod)
+                                       VALUES
+                                       (in, out, val, fk_qua, fk_cli);");
+
+                //Troca os :symbol pelos valores que irão executar
+                //Ao mesmo tempo protege esses valores de injection
+                $data->bindValue(":in",     $_POST["res_in"]);
+                $data->bindValue(":out",    $_POST["res_out"]);
+                $data->bindValue(":val",    $_POST["res_val"]);
+                $data->bindValue(":fk_qua", $_POST["fk_qua_num"]);
+                $data->bindValue(":fk_cli", $_POST["fk_cli_cod"]);
 
 				if ($data->execute()) {
 					$_SESSION['sucess']  = 'Registro cadastrado com sucesso!';
@@ -41,8 +56,27 @@ class Controller extends ConfigController
 		try {
 
 			if(isset($_POST) && !empty($_POST)) {
-				$data = $this->conn->prepare("UPDATE tb_reservas SET res_in = '".$_POST['res_in']."', res_out = '".$_POST['res_out']."', res_val = '".$_POST['res_val']."', fk_qua_num = '".$_POST['fk_qua_num']."', fk_cli_cod = '".$_POST['fk_cli_cod']."' WHERE pk_res_cod = ".$id."");
+                //Conectar no banco
+                $pdo = $this->conn;
 
+                //Prepara o query, usando :values
+                $data = $pdo->prepare("UPDATE tb_reservas
+                                       SET res_in = :in, 
+                                           res_out = :out, 
+                                           res_val = :val, 
+                                           fk_qua_num = :fk_qua, 
+                                           fk_cli_cod = :fk_cli
+                                       WHERE pk_res_cod = :id;");
+                
+                //Troca os :symbol pelos valores que irão executar
+                //Ao mesmo tempo protege esses valores de injection
+                $data->bindValue(":in",     $_POST["res_in"]);
+                $data->bindValue(":out",    $_POST["res_out"]);
+                $data->bindValue(":val",    $_POST["res_val"]);
+                $data->bindValue(":fk_qua", $_POST["fk_qua_num"]);
+                $data->bindValue(":fk_cli", $_POST["fk_cli_cod"]);
+                $data->bindValue(":id",     $id);
+                
 				if ($data->execute()) {
 					$_SESSION['sucess']  = 'Registro atualizado com sucesso!';
 				} else {
@@ -50,7 +84,17 @@ class Controller extends ConfigController
 				}
 
 			} else {
-				$data = $this->conn->prepare("SELECT * FROM tb_reservas WHERE pk_res_cod = ".$id."");
+                //Conectar no banco
+                $pdo = $this->conn;
+
+                //Prepara o query, usando :values
+                $data = $pdo->prepare("SELECT *
+                                       FROM tb_reservas
+                                       WHERE pk_res_cod = :id;");
+
+                //Troca os :symbol pelos valores que irão executar
+                //Ao mesmo tempo protege esses valores de injection
+                $data->bindValue(":id", $id);
 
 				$data->execute();
 	
@@ -76,7 +120,12 @@ class Controller extends ConfigController
 	{
 		try {
 			
-			$data = $this->conn->prepare("SELECT * FROM tb_reservas");
+            //Conectar no banco
+            $pdo = $this->conn;
+
+            //Prepara o query, usando :values
+            $data = $pdo->prepare("SELECT *
+                                   FROM tb_reservas;");
 
 			$data->execute();
 
@@ -95,7 +144,17 @@ class Controller extends ConfigController
 	{
 		try {
 			
-			$data = $this->conn->prepare("DELETE FROM tb_reservas WHERE pk_res_cod = ".$id."");
+            //Conectar no banco
+            $pdo = $this->conn;
+
+            //Prepara o query, usando :values
+            $data = $pdo->prepare("DELETE 
+                                   FROM tb_reservas
+                                   WHERE pk_res_cod = :id;");
+
+            //Troca os :symbol pelos valores que irão executar
+            //Ao mesmo tempo protege esses valores de injection
+            $data->bindValue(":id", $id);
 
 			if ($data->execute()) {
 				$_SESSION['sucess']  = 'Registro excluído com sucesso!';
@@ -119,8 +178,7 @@ class Controller extends ConfigController
 		$data = array();
 
 		$data['fk_qua_num_list']       = $this->conn->query('SELECT pk_qua_num FROM tb_quartos')->fetchAll(PDO::FETCH_ASSOC);
-$data['fk_cli_cod_list']       = $this->conn->query('SELECT pk_cli_cod FROM tb_clientes')->fetchAll(PDO::FETCH_ASSOC);
-
+        $data['fk_cli_cod_list']       = $this->conn->query('SELECT pk_cli_cod FROM tb_clientes')->fetchAll(PDO::FETCH_ASSOC);
 
 		return $data;
 	}
