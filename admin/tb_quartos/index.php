@@ -56,7 +56,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="form-group text-center">
-					<a href="<?php  echo URL;  ?>/admin/tb_quartos/functions.php?acao=adicionar" style="float:right;" class="btn btn-default">Cadastrar</a>
+					<a href="<?php  echo URL;  ?>/admin/tb_quartos/functions.php?acao=adicionar" style="float:right;" class="btn btn-success">Cadastrar</a>
 				</div>
 			</div>
 		</div>

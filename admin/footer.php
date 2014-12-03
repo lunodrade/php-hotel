@@ -9,12 +9,13 @@
       <div class="modal-body">
           
           <p id="modalAlert"></p>
-          <p id="modalDetails"></p>
+          <p id="modalDetails" style="transform: translateX(-50%); text-align: left; margin-left: 50%;;"></p>
           
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
         <button type="button" class="btn btn-primary" id="buttonConfirm"></button>
+        <button type="button" class="btn btn-primary" id="buttonSubmit"></button>
       </div>
     </div>
   </div>
@@ -22,36 +23,89 @@
                  
                    
                 <script type="text/javascript">
+
+                    /* Mostra o modal para update/delete */
+                    function showModal(jThis) {
+                            var array_title = [];
+                            var array_content = [];
+                            $("thead tr").find( "th:not(th:gt(-3))" ).each(function( index ) {
+                                array_title[index] = $( this ).text();
+                            });
+                            jThis.parent().parent().parent().find( "td:not(td:gt(-3))" ).each(function( index ) {
+                                array_content[index] = $( this ).text();
+                            });
+                            var detailsText = "";
+                            for(i=0; i<array_title.length; i++) {
+                                detailsText += "<strong>" + array_title[i] + "</strong>: " + array_content[i] + "<br>";
+                            }
+                            $("#modalDetails").html(detailsText);
+                            
+                            $("#buttonConfirm").attr("data-href", jThis.parent().attr("data-href"));
+                            
+                            $('#myModal').modal('show'); 
+                            $("#buttonSubmit").css('display', 'none');
+                            $("#buttonConfirm").css('display', 'inline-block');
+                    }
+
                     $(document).ready(function() {
                         
+                        /* Quando o botão de update é clicado em alguma linha */
                         $(".glyphicon-ok").on("click", function(e) {
                             $("#modalTitle").text("Aviso");
                             $("#modalAlert").text("Você está querendo ir para a tela de alteração, para o item a seguir:");
-                            $("#modalDetails").text("testando");    //TODO
                             $("#buttonConfirm").text("Alterar");
                             
-                            var href = $(this).parent().attr("data-href");
-                            $("#buttonConfirm").attr("data-href", href);
-                            
-                            $('#myModal').modal('show'); 
+                            var jThis = $(this);
+                            showModal(jThis);
                         });
                         
+                        /* Quando o botão de remove é clicado em alguma linha */
                         $(".glyphicon-remove").on("click", function(e) {
                             $("#modalTitle").text("Atenção!");
                             $("#modalAlert").text("Você está querendo excluir o item a seguir:");
-                            $("#modalDetails").text("testando");    //TODO
                             $("#buttonConfirm").text("Excluir");
                             
-                            var href = $(this).parent().attr("data-href");
-                            $("#buttonConfirm").attr("data-href", href);
-                            
-                            $('#myModal').modal('show'); 
+                            var jThis = $(this);
+                            showModal(jThis);
                         });
                         
+                        /* Quando o botão de confirm da modal é clicado */
                         $("#buttonConfirm").on("click", function() {
                             var url = $(this).attr("data-href");
                             window.location = url;
                         });
+                        
+                        /* Quando o submit é executado, testar se o modal recebeu ok */
+                        $("form").submit(function() {
+                            var ret = $("button[type=submit]").attr("data-ok");
+                            
+                            if(ret === "true")
+                                return true;
+                            
+                            else {
+                                $("#modalTitle").text("Aviso");
+                                $("#modalAlert").text("Você está querendo salvar o item");
+                                $("#buttonSubmit").text("Salvar");
+                                $("#modalDetails").html("");
+                                
+                                $('#myModal').modal('show');
+                                $("#buttonConfirm").css('display', 'none');
+                                $("#buttonSubmit").css('display', 'inline-block');
+                                
+                                return false;
+                            }
+                        })
+                        
+                        /* Quando o botão de confirmSubmit é clicado no modal */
+                        $("#buttonSubmit").on("click", function() {
+                            $("button[type=submit]").attr("data-ok", "true");
+                            $("button[type=submit]").click();
+                        });
+                        
+                        
+                        
+                        
+                        
                         
                         $('#datatable').DataTable( {
                             "dom": 'T<"clear">lfrtip',

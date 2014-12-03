@@ -45,7 +45,7 @@
 </select>
 </div>
 
-						<button type="submit" style="float:right;" class="btn btn-default">Salvar</button>
+						<button type="submit" style="float:right;" class="btn btn-success">Salvar</button>
 					</form>
 				</div>
 			</div>		

@@ -117,7 +117,7 @@ if($_SERVER['HTTP_HOST'] == '127.0.0.1') {
         
         td:nth-child(6) {
             width: 100px !important;
-            color: red;
+/*            color: red;*/
         }
         
         table {
@@ -167,6 +167,15 @@ if($_SERVER['HTTP_HOST'] == '127.0.0.1') {
             color: rgb(51, 51, 51);
             background-color: rgb(230, 230, 230);
             border-color: rgb(173, 173, 173);
+        }
+        span.glyphicon.glyphicon-ok, 
+        span.glyphicon.glyphicon-remove {
+            cursor: pointer;
+        }
+        
+        .table-responsive {
+            margin-left: -5%;
+            width: 110%;
         }
         
     </style>
