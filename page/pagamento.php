@@ -72,30 +72,30 @@
 
     $base64EncryptedOut = $encryptor->encrypt($plaintextOut, $password);
 
-    echo "Plaintext:\n" . $plaintextOut;
-    echo "<br><br>";
-    echo "Base64 Encrypted:\n" . $base64EncryptedOut;
-    echo "<br><br>";
-    echo "<br><br>";
+//    echo "Plaintext:\n" . $plaintextOut;
+//    echo "<br><br>";
+//    echo "Base64 Encrypted:\n" . $base64EncryptedOut;
+//    echo "<br><br>";
+//    echo "<br><br>\n\n\n";
 
-    echo "<a target='_blank' href='view_reserve.php?data=" . rawurlencode($base64EncryptedOut) . "'>Imprimir reserva</a>";
+    echo "<a target='_blank' href='view_reserve.php?data=" . rawurlencode($base64EncryptedOut) . ")'>Imprimir reserva</a>";
 
-    echo "<br><br>";
-    $password = "myPassword";
-
-    $base64EncryptedIn = $base64EncryptedOut;
-
-    $decryptor = new \RNCryptor\Decryptor();
-    $plaintextIn = $decryptor->decrypt($base64EncryptedIn, $password);
-
-    echo "Base64 Encrypted:\n" . $base64EncryptedIn;
-    echo "<br><br>";
-    echo "Plaintext:\n" . $plaintextIn;
-    echo "<br><br>------------------------------------------<br><br>";
-
-    $arrIn = json_decode($plaintextIn, true);
-
-    echo json_encode($arrIn);
+//    echo "\n\n<br><br>";
+//    $password = "myPassword";
+//
+//    $base64EncryptedIn = $base64EncryptedOut;
+//
+//    $decryptor = new \RNCryptor\Decryptor();
+//    $plaintextIn = $decryptor->decrypt($base64EncryptedIn, $password);
+//
+//    echo "Base64 Encrypted:\n" . $base64EncryptedIn;
+//    echo "<br><br>";
+//    echo "Plaintext:\n" . $plaintextIn;
+//    echo "<br><br>------------------------------------------<br><br>";
+//
+//    $arrIn = json_decode($plaintextIn, true);
+//
+//    echo json_encode($arrIn);
 
 ?>
 
