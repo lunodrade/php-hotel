@@ -1,10 +1,73 @@
-<?php
-
-require_once '../lib/RNCryptor/autoload.php';
-
-?>
 <?php 
 include '../constantes.php'; 
+
+require_once '../lib/RNCryptor/autoload.php';
+require_once "../lib/phpqrcode/qrlib.php"; 
+
+
+$password = "myPassword";
+$base64EncryptedIn = rawurldecode($_GET['data']);
+$decryptor = new \RNCryptor\Decryptor();
+$plaintextIn = $decryptor->decrypt($base64EncryptedIn, $password);
+$arrIn = json_decode($plaintextIn, true);
+
+$filename = '../temp/qrcode.png';
+$errorCorrectionLevel = 'L';  
+$matrixPointSize = 6;
+$data = dirname(__FILE__) . "/preview?data=" . $base64EncryptedIn;
+QRcode::png($data, $filename, $errorCorrectionLevel, $matrixPointSize, 2);   
+
+function echoInfos($arrIn) {
+    //Conectar no banco
+    $pdo = new PDO("mysql:host=".DBHOST.";dbname=".DBNAME."", DBUSER, DBPASS);
+    $pdo->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+
+    //Prepara o query, usando :values
+    $consulta = $pdo->prepare("SELECT DISTINCT c.cli_nome, c.cli_sobr, r.res_in, r.res_out, r.fk_qua_num
+                               FROM tb_reservas r
+                               INNER JOIN tb_clientes c ON c.pk_cli_cod = r.fk_cli_cod
+                               WHERE pk_res_cod = :res_cod;");
+
+    //Troca os :symbol pelos valores que irão executar
+    //Ao mesmo tempo protege esses valores de injection
+    $id = 0;
+    $consulta->bindParam(":res_cod", $id);
+    
+    $cliente;
+    $checkIn;
+    $checkOut;
+    $rooms = [];
+    
+    for($i=0; $i<count($arrIn); $i++) {
+        //Pega o ID do select
+        $id = $arrIn[$i];
+        //Executa o sql
+        $consulta->execute();
+
+        if ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
+            //Trabalhar com os resultados
+            $cliente = $linha['cli_nome'] . " " . $linha['cli_sobr'];
+            $checkIn = $linha['res_in'];
+            $checkOut = $linha['res_out'];
+            $rooms[$i] = $linha['fk_qua_num'];
+        } else {
+            echo "erro";
+            die();
+        }
+    }
+    
+    echo "<h1><strong>Cliente</strong></h1>"; 
+    echo "<h3>" . $cliente . "</h3><br>"; 
+    echo "<h1><strong>Data da reserva</strong></h1>"; 
+    echo "<h4><strong>Entrada: </strong>" . $checkIn . "</h4>"; 
+    echo "<h4><strong>Saída: </strong>" . $checkOut . "</h4><br>"; 
+    echo "<h1><strong>Quartos</strong></h1>"; 
+    echo "<ul style='font-size:1.5em;'>";
+    for($i=0; $i<count($rooms); $i++) {
+        echo "<li>" . $rooms[$i] . "</li>";
+    }
+    echo "</ul>";
+}
 ?>
 
 <!DOCTYPE html>
@@ -25,9 +88,6 @@ include '../constantes.php';
     <!-- Bootstrap core CSS -->
     <link href="<?php echo ASSETS ?>/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="<?php echo ASSETS ?>/css/cover.css" rel="stylesheet">
-
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="<?php echo ASSETS ?>/js/ie-emulation-modes-warning.js"></script><style type="text/css"></style>
@@ -40,7 +100,10 @@ include '../constantes.php';
     
 
     <style type="text/css">
-        
+        body {
+            text-align: center;
+            padding: 100px 0;
+        }
         
         .masthead, .mastfoot {
             position: static;
@@ -52,6 +115,10 @@ include '../constantes.php';
         
         .mastfoot {
             margin-top: 100px;
+        }
+        
+        .details {
+            text-align: left;
         }
     </style>
     
@@ -69,54 +136,36 @@ include '../constantes.php';
             <div class="inner">
               
               
-              <?php
+              
 
-
-$password = "myPassword";
-
-$base64EncryptedIn = rawurldecode($_GET['data']);
-//$base64EncryptedIn = "AwHLJhdnkGFMXex0soqCJRGteESjMhC9s5A76Uziwq7z05WQV8wm2BXuC30OQM9visuLKkpxVLfuZ7+YCHGW6zayl0B9k78wr/q9kP6kK6cPOSPkg8X5G+S+XrvKbymHFRVCnEO7oKwiotWi/Dwq3WDF+SNIMUH+/IPD1QFHekRh3A==";
-
-$decryptor = new \RNCryptor\Decryptor();
-$plaintextIn = $decryptor->decrypt($base64EncryptedIn, $password);
-
-echo "GET: " . rawurldecode($_GET['data']);
-echo "<br><br>";
-echo "Plaintext:\n" . $plaintextIn;
-echo "<br><br>------------------------------------------<br><br>";
-
-$arrIn = json_decode($plaintextIn, true);
-
-echo json_encode($arrIn);
-
-/*************************************************************************/
-
-echo "<br><br>";
-    include "../lib/phpqrcode/qrlib.php"; 
-    
-    $filename = 'qrcode.png';
-    
-    
-    
-    $errorCorrectionLevel = 'L';  
-
-    $matrixPointSize = 6;
-    
-    $data = dirname(__FILE__) . "/preview?data=" . $base64EncryptedIn;
-
-    QRcode::png($data, $filename, $errorCorrectionLevel, $matrixPointSize, 2);   
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<div class="row clearfix">
+				<div class="col-md-2 column">
+				</div>
+				<div class="col-md-4 column details">
+				    <?php echoInfos($arrIn); ?>
+				</div>
+				<div class="col-md-4 column">
+                    <?php echo '<img src="' . $filename . '" />';  ?>
+				</div>
+				<div class="col-md-2 column">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
         
-    //display generated file
-    echo '<img src="'.$filename.'" /><hr/>';  
     
 
-?>
+
               
             </div>
           </div>            
            <div class="mastfoot">
             <div class="inner">
-              <p>Rodape</p>
+              <p>Empresa Tal, na rua x, do bairro y, da cidade z, na República Rio-Grandense. <br>Nenhum direito reservado :)</p>
             </div>
           </div>
 

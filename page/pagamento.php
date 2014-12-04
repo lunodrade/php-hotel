@@ -1,5 +1,7 @@
-<?php  include '../_header.php';  ?>
-<?php  require_once '../auth/perm_user.php'; ?>
+<?php  
+    include '../_header.php'; 
+    require_once '../auth/perm_user.php'; 
+?>
 
 <?php  
 	require_once '../lib/RNCryptor/autoload.php';
@@ -33,12 +35,15 @@
     $data->bindParam(":fk_qua", $fk_qua);
     $data->bindValue(":fk_cli", $fk_cli);
 
+    $arrReservas = [];
+
     for($i=0; $i<$arrSize-2; $i++) {
         $val = (float) $arrOut[$i][1];
         $fk_qua = (float) $arrOut[$i][0];
         
         if ($data->execute()) {
-
+            
+            $arrReservas[$i] = $pdo->lastInsertId();
         } else {
             echo "erro";
             die();
@@ -56,9 +61,11 @@
    
    
 
-    <h1>Tela de pagamento</h1>
+    <h1>Reserva concluída com sucesso!</h1>
     <br>
-    <p>Reserva concluída com sucesso!</p>
+    <p>Sua reserva foi concluída com sucesso, basta agora proceder até o balcão e ela estará em seu nome.<br>
+    Se preferir, clique no botão abaixo e imprima sua reserva (ou simplesmente copie o QRcode que irá visualizar nela).<br><br>
+    Muito obrigado, e aguardamos sua presença! :)</p>
 
     <br><br><br>
 
@@ -66,37 +73,13 @@
 <?php
 
     $password = "myPassword";
-    $plaintextOut = json_encode($arrOut);
+    $plaintextOut = json_encode($arrReservas);
 
     $encryptor = new \RNCryptor\Encryptor();
 
     $base64EncryptedOut = $encryptor->encrypt($plaintextOut, $password);
 
-//    echo "Plaintext:\n" . $plaintextOut;
-//    echo "<br><br>";
-//    echo "Base64 Encrypted:\n" . $base64EncryptedOut;
-//    echo "<br><br>";
-//    echo "<br><br>\n\n\n";
-
-    echo "<a target='_blank' href='view_reserve.php?data=" . rawurlencode($base64EncryptedOut) . ")'>Imprimir reserva</a>";
-
-//    echo "\n\n<br><br>";
-//    $password = "myPassword";
-//
-//    $base64EncryptedIn = $base64EncryptedOut;
-//
-//    $decryptor = new \RNCryptor\Decryptor();
-//    $plaintextIn = $decryptor->decrypt($base64EncryptedIn, $password);
-//
-//    echo "Base64 Encrypted:\n" . $base64EncryptedIn;
-//    echo "<br><br>";
-//    echo "Plaintext:\n" . $plaintextIn;
-//    echo "<br><br>------------------------------------------<br><br>";
-//
-//    $arrIn = json_decode($plaintextIn, true);
-//
-//    echo json_encode($arrIn);
-
+    echo "<a class='btn btn-primary btn-lg' role=''button' target='_blank' href='view_reserve.php?data=" . rawurlencode($base64EncryptedOut) . ")'>Imprimir reserva</a>";
 ?>
 
 
