@@ -23,13 +23,15 @@
         -webkit-box-shadow: rgba(0, 0, 19, 0.0745098) 0px 17px 25px 0px inset, rgba(102, 175, 233, 0.6) 0px 0px 5px 3px;
     }
     
-    
     .btnCheck {
-            height: 34px;
-            width: 69px;
-            border-radius: 4px;
+        height: 34px;
+        width: 69px;
+        border-radius: 4px;
         color: black;
     }
+    
+    /* CSS de campos válidos e inválidos pelo pattern */
+    input:invalid   { background-color: white; color: red; }
     
 </style>
 
@@ -69,7 +71,7 @@
             class="form-control" required id="email" name="email" type="email"  placeholder="Digite o email" />
           </div>
                <div class="col-md-2">
-                <button class="btnCheck btn btn-default">check</button>
+                <button tabindex="-1" class="btnCheck btn btn-default">check</button>
             </div>
      </div>
     
@@ -105,14 +107,12 @@
     </div>
 
 
-
-
    <div class="form-group">
         <label for="rg" class="col-md-3 control-label">RG</label>
         <div class="col-md-9">
             <input required pattern="[0-9]{10}"
-            title="Informe o RG somente números"
-             type="number" class="form-control" name="rg" placeholder="RG">
+            title="Informe o RG, somente números"
+             type="text" class="form-control" name="rg" placeholder="RG">
         </div>
     </div>
     
@@ -120,8 +120,8 @@
         <label for="cpf" class="col-md-3 control-label">CPF</label>
         <div class="col-md-9">
             <input required pattern="[0-9]{11}"
-               title="Informe o CPF somente números"
-            type="number" class="form-control" name="cpf" placeholder="CPF">
+               title="Informe o CPF, somente números"
+            type="text" class="form-control" name="cpf" placeholder="CPF">
         </div>
     </div>
     
@@ -130,13 +130,13 @@
         <div class="col-md-9">
             <input required pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}"
             type="date"
-            title="Informe a data de seu nascimento" class="form-control" name="datanasc" placeholder="Data de Nascimento">
+            title="Informe a data de seu nascimento (ex: 22/08/1990)" class="form-control" name="datanasc" placeholder="Data de Nascimento">
         </div>
     </div>
 
     <div class="form-group">                               
         <div class="col-md-12">
-            <button id="btn-signup" type="submit" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp; Sign Up</button>
+            <button data-ok="false" id="btn-signup" type="submit" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp; Sign Up</button>
 
         </div>
     </div>
@@ -146,15 +146,11 @@
     
 </div>
 
-
-
-
-
-
 <!-- ********************************************* -->
 
-        	<script type="text/javascript">
+    <script type="text/javascript">
     	jQuery(document).ready(function($) {
+                        
     		$('.btnCheck').click(function(){
     		// e.preventDefault();
                 makeAjaxRequest();
@@ -162,10 +158,15 @@
     		});
 
                         
-           $('form').submit(function(e){
-               // e.preventDefault();
-                     
-            return true;
+            $('form').submit(function(e){
+                var ret = $("button[type=submit]").attr("data-ok");
+                            
+                if(ret === "true")
+                    return true;
+                else {
+                    showModal();
+                    return false;
+                }
             });
                         
             $('#email').change(function() {
@@ -173,19 +174,18 @@
             })
 
             function makeAjaxRequest() {
-                var x;
                 $.ajax({
                     url: '../ajax/checkAvailability.php',
                     type: 'get',
                     data: {email: $('input#email').val()},
+                    async: false,
                     success: function(response) {
                         if(response == "<p>Disponivel</p>") {
                             $('.btnCheck').removeClass('btn-default btn-danger').addClass('btn-success');
-                            
+                            $("button[type=submit]").attr("data-ok", "true");
                         } else {
                             $('.btnCheck').removeClass('btn-default btn-success').addClass('btn-danger');
-                            
-                           
+                            $("button[type=submit]").attr("data-ok", "false");
                         }
                     }
                 });
@@ -193,34 +193,6 @@
             }
     	});
     </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

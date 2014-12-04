@@ -76,6 +76,28 @@ if ($aut->esta_logado()) {
         .mastfoot {
             margin-top: 100px;
         }
+        
+        #myModal {
+            color: black;
+            text-shadow: none;
+        }
+        
+        .btn-default {
+            color: #333;
+            background-color: #fff;
+            border-color: #ccc;
+        }
+        
+        .btn-default:hover, 
+        .btn-default:focus, 
+        .btn-default.focus, 
+        .btn-default:active, 
+        .btn-default.active, 
+        .open>.dropdown-toggle.btn-default {
+            color: #333;
+            background-color: #e6e6e6;
+            border-color: #adadad;
+        }
     </style>
     
   </head>
