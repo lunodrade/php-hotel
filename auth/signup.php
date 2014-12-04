@@ -46,7 +46,7 @@
     <div class="form-group">
         <label for="firstname" class="col-md-3 control-label">Nome</label>
         <div class="col-md-9">
-            <input pattern="[A-Z]{1}[a-z]*" title="sse"
+            <input pattern="[A-Z]{1}[a-z]*" title="Somente um nome, primeira letra maiuscula"
             type="text"  class="form-control" required name="nome" placeholder="Primeiro nome">
         </div>
     </div>
@@ -54,7 +54,7 @@
     <div class="form-group">
         <label for="lastname" class="col-md-3 control-label">Sobrenome</label>
         <div class="col-md-9">
-            <input    pattern="[A-Z]{1}[a-z]*" required
+            <input   pattern="[A-Z]{1}[a-z]*" title="Somente um sobrenome, primeira letra maiuscula" required
             type="text" class="form-control" name="sobrenome" placeholder="Sobrenome">
         </div>
     </div>
@@ -65,6 +65,7 @@
          <label for="email" class="col-md-3 control-label">Email</label>
          <div class="col-md-7">
             <input pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+            title="seuemail@dominio.com"
             class="form-control" required id="email" name="email" type="email"  placeholder="Digite o email" />
           </div>
                <div class="col-md-2">
@@ -76,7 +77,9 @@
     <div class="form-group">
         <label for="password" class="col-md-3 control-label">Senha</label>
         <div class="col-md-9">
-            <input type="password" required class="form-control" name="senha" placeholder="Senha">
+            <input pattern="[a-z0-9]{5}[a-z0-9]*"type="password" required class="form-control" name="senha" placeholder="Senha"
+            title="A senha deve conter no minimo 5 digitos sendo letras ou números">
+            
         </div>
     </div>
     
@@ -95,7 +98,8 @@
     <div class="form-group">
         <label for="lastname" class="col-md-3 control-label">Telefone</label>
         <div class="col-md-9">
-        <input  pattern="[0-9]{2}[0-9]{8,9}"     
+        <input  pattern="[0-9]{2}[0-9]{8,9}" 
+        title="Informe somente números, incluindo o código de área"    
         type="tel" required class="form-control" name="telefone" placeholder="Telefone">
         </div>
     </div>
@@ -107,6 +111,7 @@
         <label for="rg" class="col-md-3 control-label">RG</label>
         <div class="col-md-9">
             <input required pattern="[0-9]{10}"
+            title="Informe o RG somente números"
              type="number" class="form-control" name="rg" placeholder="RG">
         </div>
     </div>
@@ -115,6 +120,7 @@
         <label for="cpf" class="col-md-3 control-label">CPF</label>
         <div class="col-md-9">
             <input required pattern="[0-9]{11}"
+               title="Informe o CPF somente números"
             type="number" class="form-control" name="cpf" placeholder="CPF">
         </div>
     </div>
@@ -123,7 +129,8 @@
         <label for="datanasc" class="col-md-3 control-label">Data Nacimento</label>
         <div class="col-md-9">
             <input required pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}"
-            type="date" class="form-control" name="datanasc" placeholder="Data de Nascimento">
+            type="date"
+            title="Informe a data de seu nascimento" class="form-control" name="datanasc" placeholder="Data de Nascimento">
         </div>
     </div>
 
@@ -157,8 +164,8 @@
                         
            $('form').submit(function(e){
                // e.preventDefault();
-                //makeAjaxRequest();
-                return true;
+                     
+            return true;
             });
                         
             $('#email').change(function() {
@@ -166,6 +173,7 @@
             })
 
             function makeAjaxRequest() {
+                var x;
                 $.ajax({
                     url: '../ajax/checkAvailability.php',
                     type: 'get',
@@ -176,9 +184,12 @@
                             
                         } else {
                             $('.btnCheck').removeClass('btn-default btn-success').addClass('btn-danger');
+                            
+                           
                         }
                     }
                 });
+                
             }
     	});
     </script>
