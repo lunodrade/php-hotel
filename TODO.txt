@@ -17,6 +17,10 @@
 == Conferir os parametros passados dos FORM
     Há alguns que passam acao=logar, por exemplo, sem necessidade
 
+== Finalizar o layout para a página "page/finalizar.php"
+
+== Criar e finalizar a página "page/pagamento.php"
+
 =================== COISAS PRA INICIAR A FAZER
 
 
@@ -28,10 +32,6 @@
 
 == ? Trocar os $_GET por $_POST
      Tomar cuidado nos locais que usam function/controller, porque lá há interpretação entre GET e POST já...
-
-== Finalizar o layout para a página "page/finalizar.php"
-
-== Criar e finalizar a página "page/pagamento.php"
 
 == Finalizar o visual da página user
     Se for ser uma tabela mesmo, poderia utilizar as bibliotecas que a parte de admin usam, e então ficar com um visual semelhante
