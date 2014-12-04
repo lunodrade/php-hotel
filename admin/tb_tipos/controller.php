@@ -22,7 +22,7 @@ class Controller extends ConfigController
                 $data = $pdo->prepare("INSERT INTO tb_tipos
                                        (tip_nome, tip_val, tip_desc)
                                        VALUES
-                                       (nome, val, desc);");
+                                       (:nome, :val, :desc);");
 
                 //Troca os :symbol pelos valores que irão executar
                 //Ao mesmo tempo protege esses valores de injection

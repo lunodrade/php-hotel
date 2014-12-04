@@ -13,7 +13,7 @@
                 </thead>
             </table>
 
-            <button type="submit" id="acao" name="acao" value="logar">Entrar</button>
+            <button type="submit" id="acao" name="" value="">Entrar</button>
         </form>
         
 		

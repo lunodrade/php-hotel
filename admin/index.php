@@ -5,13 +5,13 @@
 
 			<div id="body">
 
-				<p>Olá, tudo bom?</p>
+				<p>Olá! Tudo bom, Administrador?</p>
 				
-				<p>Para o funcionamento do sistema é necessário apenas configurar os dados de acesso ao banco de dados no arquivo <code>database.php</code>
+                <p>Para o funcionamento do sistema lembre-se sempre de configurar os dados de acesso ao banco de dados no arquivo <code>database.php</code></p>
 
+                <p>A barra de navegação acima permite que visualize, altere, exclua ou insira qualquer dado no banco de dados. Mas vale lembrar que o acesso aqui é mais livre.
+                    Apesar que ser testado algumas coisas para o funcionamento, dados são apenas "semi-tratados", assim como ocorre na página do phpMyAdmin.</p>
 			</div>
-			
-			<small>contato: só depois</small>
 
 
 	<?php  include 'footer.php';  ?>

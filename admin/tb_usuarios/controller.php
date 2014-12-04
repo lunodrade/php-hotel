@@ -22,7 +22,7 @@ class Controller extends ConfigController
                 $data = $pdo->prepare("INSERT INTO tb_usuarios
                                        (usu_email, usu_senha, usu_tipo, usu_conf, usu_hash, fk_cli_cod)
                                        VALUES
-                                       (email, senha, tipo, conf, hash, fk_cli);");
+                                       (:email, :senha, :tipo, :conf, :hash, :fk_cli);");
 
                 //Troca os :symbol pelos valores que irão executar
                 //Ao mesmo tempo protege esses valores de injection

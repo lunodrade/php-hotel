@@ -1,6 +1,6 @@
             <div class="mastfoot">
             <div class="inner">
-              <p>Rodap&eacute;</p>
+              <p>Empresa Tal, na rua x, do bairro y, da cidade z, na República Rio-Grandense. <br>Nenhum direito reservado :)</p>
             </div>
           </div>
 

@@ -1,4 +1,19 @@
-<?php  include '../_header.php';  ?>
+<?php  include '../_header.php';  
+
+    $sess = Sessao::instanciar();
+
+    $arr = [];
+    $count = count($_GET["room"]);
+    for ($i = 0; $i < $count; $i++) {
+        $arr[$i] = [$_GET["room"][$i], $_GET["values"][$i]];
+    }
+
+    $arr[$count]     = $_GET["checkIn"];
+    $arr[$count + 1] = $_GET["checkOut"];
+
+    $sess->set('data', json_encode($arr));
+
+?>
 
 <?php
 function printValue() {    
@@ -33,16 +48,18 @@ function printValue() {
         die();
     }
     
-    
-    
-    
-    
 }
 ?>
     
     <style type="text/css">
         h2 {
             margin: 1% 0 1% 0;
+        }
+        .buttonGroup {
+            text-align: right;
+        }
+        .buttonGroup > a {
+            margin: 5px;
         }
     </style>
 		
@@ -58,18 +75,19 @@ function printValue() {
   
   
    
-    <h1>Você selecionou o(s) seguinte(s) quarto(s)</h1><br>
+    <h2>Você selecionou o(s) seguinte(s) quarto(s)</h2><br>
     <?php
     foreach($_GET['room'] as $room) {
-        echo '<h2>' . $room . '</h2>';
+        echo '<h3>' . $room . '</h3>';
     }
     ?>
+        
+    <br><h1>Resultando no valor de R$ <?php printValue(); ?></h1><br><br>
     
-    
-    <h1>Resultando no valor de R$ <?php printValue(); ?></h1><br>
-    
-    
-    
+    <div class="buttonGroup">
+        <a type="button" class="btn btn-large btn-default" onclick="history.go(-1);return true;">Voltar</a>
+        <a type="button" class="btn btn-large btn-primary" href="pagamento.php">Finalizar e reservar</a>
+    </div>
     
     
     

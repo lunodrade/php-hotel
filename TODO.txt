@@ -14,11 +14,11 @@
     Falta:
         - nada -
     
+== Conferir os parametros passados dos FORM
+    Há alguns que passam acao=logar, por exemplo, sem necessidade
 
 =================== COISAS PRA INICIAR A FAZER
 
-== Conferir os parametros passados dos FORM
-    Há alguns que passam acao=logar, por exemplo, sem necessidade
 
 == Finalizar a página /auth/signup.php para usar pattern e garantir confiabilidade dos dados
 

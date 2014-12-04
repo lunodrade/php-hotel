@@ -7,8 +7,9 @@ function getRoomList($checkIn, $checkOut) {
     $pdo->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 
     //Prepara o query, usando :values
-    $consulta = $pdo->prepare("SELECT pk_qua_num
-                               FROM tb_quartos
+    $consulta = $pdo->prepare("SELECT q.pk_qua_num, t.tip_val
+                               FROM tb_quartos q
+                               INNER JOIN tb_tipos t ON q.fk_tip_cod = t.pk_tip_cod
                                WHERE pk_qua_num NOT IN (
                                    SELECT DISTINCT fk_qua_num
                                    FROM tb_reservas r
@@ -130,7 +131,7 @@ function getRoomList($checkIn, $checkOut) {
                     </div>
                     <div class="col-xs-6 description-room">
                         <p>
-                            <?php echo $room['pk_qua_num'] ?>
+                            <?php echo "<strong>" . $room['pk_qua_num'] . "</strong><br>R$: " . $room['tip_val'] ?>
                         </p>
                         <span>
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
@@ -146,12 +147,21 @@ function getRoomList($checkIn, $checkOut) {
                             name="room[]" 
                             value="<?php echo $room['pk_qua_num'] ?>"
                         >
+                        <input 
+                            type="hidden" 
+                            name="values[]" 
+                            value="<?php echo $room['tip_val'] ?>"
+                        >
                     </div>
+                    
+                    
                 </div>
                 <?php  
                     }
                 }
             ?>
+            <input type="hidden" name="checkIn" value=<?php echo $_GET['checkIn'] ?> >
+            <input type="hidden" name="checkOut" value=<?php echo $_GET['checkOut'] ?> >
             <button type="submit" id="sendRooms"></button>
         </form>
     </div>

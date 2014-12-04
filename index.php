@@ -58,7 +58,7 @@
 <div class="col-xs-6"><input type="text" class="span2" name="checkOut" value="" id="dpd2" data-date-format="dd/mm/yyyy" pattern="[0-9]{2}\/[0-9]{2}\/[0-9]{4}" required></div>
 </div>
 
-<button type="submit" id="acao" name="acao" value="logar">Entrar</button>
+<button type="submit" id="acao" name="" value="">Entrar</button>
 </form>
 </div>
           

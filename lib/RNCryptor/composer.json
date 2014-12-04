@@ -1,0 +1,33 @@
+{
+	"name": "rncryptor/rncryptor",
+    "type": "library",
+    "description": "PHP implementation of RNCryptor",
+    "keywords": ["encryption", "crypto", "rncryptor"],
+    "homepage": "http://rncryptor.github.io",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Rob Napier",
+            "email": "robnapier@gmail.com"
+        },
+        {
+            "name": "Guysung Kim",
+            "email": "guysung.kim@gmail.com"
+        },
+        {
+            "name": "Curtis Farnham",
+            "email": "curtisfarnham@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "ext-mcrypt": "*"
+    },
+    "require-dev": {
+		"rncryptor/spec": "3.0.1",
+		"phpunit/phpunit": "3.7.*"
+    },
+    "autoload": {
+        "psr-0": {"RNCryptor": "lib/"}
+    }
+}
