@@ -7,7 +7,7 @@ function getRoomList($checkIn, $checkOut) {
     $pdo->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 
     //Prepara o query, usando :values
-    $consulta = $pdo->prepare("SELECT q.pk_qua_num, t.tip_val
+    $consulta = $pdo->prepare("SELECT q.pk_qua_num, t.tip_val, t.tip_desc
                                FROM tb_quartos q
                                INNER JOIN tb_tipos t ON q.fk_tip_cod = t.pk_tip_cod
                                WHERE pk_qua_num NOT IN (
@@ -134,10 +134,7 @@ function getRoomList($checkIn, $checkOut) {
                             <?php echo "<strong>" . $room['pk_qua_num'] . "</strong><br>R$: " . $room['tip_val'] ?>
                         </p>
                         <span>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                            Voluptatum adipisci error non tempora inventore officia dolores 
-                            eligendi doloremque voluptas quisquam quibusdam illum tempore 
-                            modi repudiandae iusto necessitatibus laborum, impedit ipsum.
+                            <?php echo $room['tip_desc']; ?>
                         </span>
                     </div>
                     <div class="col-xs-2 checkbox-room">
