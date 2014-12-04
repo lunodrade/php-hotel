@@ -14,7 +14,7 @@ $arrIn = json_decode($plaintextIn, true);
 $filename = '../temp/qrcode.png';
 $errorCorrectionLevel = 'L';  
 $matrixPointSize = 6;
-$data = URL . "/page/view_reserve?data=" . $base64EncryptedIn;
+$data = URL . "/page/view_reserve.php?data=" . $base64EncryptedIn;
 QRcode::png($data, $filename, $errorCorrectionLevel, $matrixPointSize, 2);   
 
 function echoInfos($arrIn) {

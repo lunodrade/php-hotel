@@ -79,7 +79,7 @@
 
     $base64EncryptedOut = $encryptor->encrypt($plaintextOut, $password);
 
-    echo "<a class='btn btn-primary btn-lg' role=''button' target='_blank' href='view_reserve.php?data=" . rawurlencode($base64EncryptedOut) . ")'>Imprimir reserva</a>";
+    echo "<a class='btn btn-primary btn-lg' role=''button' target='_blank' href='view_reserve.php?data=" . rawurlencode($base64EncryptedOut) . "'>Imprimir reserva</a>";
 ?>
 
 
