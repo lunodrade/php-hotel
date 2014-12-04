@@ -57,6 +57,7 @@
     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
     $headers .= "From: <hotel@lucianoandrade.me>" . "\r\n";
 
+
     if(mail($destinatario, $assunto, $email, $headers)) {
         echo "\nOk! \n";
         //redireciona para pagina de login apos finalizar cadastro e enviar pedido de confirmação de email
