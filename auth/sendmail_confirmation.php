@@ -57,17 +57,15 @@
     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
     $headers .= "From: <hotel@lucianoandrade.me>" . "\r\n";
 
-    if(mail($destinatario, $assunto, $email, $headers))
+    if(mail($destinatario, $assunto, $email, $headers)) {
         echo "\nOk! \n";
-    else
+        //redireciona para pagina de login apos finalizar cadastro e enviar pedido de confirmação de email
+        //header("Location: ". URL . '/auth/login.php?redirect=true');
+        header('location: unconfirmed_email.php');
+    } else {
         echo "\nErro! \n";
+        die();
+    }
     
-
-    //redireciona para pagina de login apos finalizar cadastro e enviar pedido de confirmação de email
-    //header("Location: ". URL . '/auth/login.php?redirect=true');
-
-
-    header('location: unconfirmed_email.php');
-    die();
     
 ?>
